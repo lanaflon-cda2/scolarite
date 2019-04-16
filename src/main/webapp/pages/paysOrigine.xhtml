@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.PaysOrigineTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="PaysOrigineListForm">
+            <p:menubar autoDisplay="true">
+                <p:menuitem value="#{myBundle.Cycle}" url="/pages/cycle.xhtml" title="Cycle d'étude"/>
+                <p:menuitem value="#{myBundle.Niveau}" url="/pages/niveau.xhtml" title="Niveau d'étude"/>
+                <p:menuitem value="#{myBundle.Parcours}" url="/pages/filiere.xhtml" title="Filière d'étude"/>
+                <p:menuitem value="#{myBundle.Option}" url="/pages/option.xhtml" title="Option d'étude"/>
+                <!--                <p:menuitem value="|" />-->
+                <p:menuitem value="#{myBundle.AnneeAccademique}" url="/pages/anneeAccademique.xhtml" title="Année accadémique"/>
+<!--                <p:menuitem value="#{myBundle.Promotion}" url="/pages/promotion.xhtml" title="Promotion d'étude"/>
+                <p:menuitem value="|" />-->
+                <p:menuitem value="#{myBundle.PaysOrigine}" url="/pages/paysOrigine.xhtml" title="Pays d'origine"/>
+                <p:menuitem value="#{myBundle.RegionOrigine}" url="/pages/regionOrigine.xhtml" title="Région d'origine" />
+<!--                <p:menuitem value="#{myBundle.DepartementOrigine}" url="/pages/departementOrigine.xhtml" title="Departement d'origine" />
+                <p:menuitem value="#{myBundle.ArrondissementOrigine}" url="/pages/arrondissementOrigine.xhtml" title="Arrondissement d'origine"/>-->
+                <p:menuitem value="#{myBundle.Nouveau}" icon="ui-icon-plus" url="/etudiant/nouveau.xhtml" title="Nouveau" />
+                <p:menuitem value="#{myBundle.Editer}"  url="/etudiant/modifier.xhtml" title="modifier" />
+            </p:menubar>
+            <br/>
+            <h:panelGroup id="display">
+                <h:panelGrid  columns="2" styleClass="noBorders" cellpadding="1" cellspacing="5" >
+                    <h:outputText value="#{myBundle.PaysOrigine}" />
+                    <p:inputText  value="#{paysOrigineBean.pays.nom_pays}" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:250px"/>
+                </h:panelGrid>
+                <p:commandButton  type="submit();" actionListener="#{paysOrigineBean.enregistrer()}" value="#{myBundle.Enregistrer}" 
+                                  update="display,:PaysOrigineListForm:datalist,:growl" />
+            </h:panelGroup>
+            <hr/>
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListePays}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+            <p:dataTable id="datalist" value="#{paysOrigineBean.paysList}" var="item"
+                         selectionMode="single" selection="#{paysOrigineBean.paysChoisi}"
+                         rowKey="#{item.id_pays}"
+                         emptyMessage="#{myBundle.ListePaysOrigineVide}"
+                         rowIndexVar="index"
+                         >
+
+                <!--                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>-->
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{item.nom_pays}" filterBy="#{item.nom_pays}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.PaysOrigine}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_pays}"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

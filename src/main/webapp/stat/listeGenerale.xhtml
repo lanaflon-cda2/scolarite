@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+<!--    <ui:define name="title">
+        <h:outputText value="#{myBundle.Afficher}"/>
+    </ui:define>-->
+
+    <ui:define name="body">
+        <h:form id="menuForm4">
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="  #{myBundle.ListeEtudiantInscritTitre}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+            <p:growl id="messages"/>
+            <p:dataTable id="data" value="#{inscriptionBean.listeInscritGeneral}" 
+                             var="item"
+                             selectionMode="single" 
+                             rowKey="#{item.etudiant.id_etudiant}"
+                             paginator="true"
+                             rows="15"
+                             rowIndexVar="index"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" 
+                             style="margin-top:0px"
+                             editable="true" 
+                             widgetVar="dataTable" 
+                             emptyMessage="#{myBundle.ListeVide}">
+
+<!--                    <p:ajax event="rowEdit" listener="#{inscriptionBean.onEdit}" update=":EtudiantForm:display,:EtudiantForm:messages" />  
+                    <p:ajax event="rowEditCancel" listener="#{inscriptionBean.onCancel}" update=":EtudiantForm:display,:EtudiantForm:messages" /> -->
+
+                <f:facet name="header">
+<!--                    <p:inputText id="t2"  value="#{inscriptionBean.titre}" disabled="true" style="width:400px;text-align: center;font-size: 100px;font-style: inherit"/> 
+                    <p:inputText id="t"  value="#{inscriptionBean.effectif}" disabled="true" style="width:45px"/> -->
+                    <!--<h:commandButton id="imprimer" value="#{myBundle.ExporterPdf}" type="submit();" actionListener="#{inscriptionBean.pdf()}"/>-->
+                    <h:commandButton id="imprimer1" value="#{myBundle.ExporterExcel}">
+                        <p:dataExporter type="xls" postProcessor="#{statFiliereGenreBean.postProcessXLS}"
+                                        target="data" fileName="ListeCouranteEtudiants" />
+                    </h:commandButton>
+                </f:facet>   
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.etudiant.matricule}" filterBy="#{item.etudiant.matricule}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Matricule}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.matricule}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.etudiant.nom}" filterBy="#{item.etudiant.nom}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.NomPrenom}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.nom}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.etudiant.date_naiss}" filterBy="#{item.etudiant.date_naiss}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.DateNaiss}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.date_naiss}" >
+                        <f:convertDateTime parent="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column sortBy="#{item.etudiant.lieu_naiss}" filterBy="#{item.etudiant.lieu_naiss}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.LieuNaiss}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.lieu_naiss}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.etudiant.genre}" filterBy="#{item.etudiant.genre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Genre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.genre}"/>
+                </p:column> 
+                <p:column sortBy="#{item.etudiant.paysOrigine.nom_pays}" filterBy="#{item.etudiant.paysOrigine.nom_pays}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.PaysOrigine}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.paysOrigine.nom_pays}"/>
+                </p:column>
+                <p:column sortBy="#{item.etudiant.regionOrigine.nom_regionOrigine}" filterBy="#{item.etudiant.regionOrigine.nom_regionOrigine}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.RegionOrigine}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.regionOrigine.nom_regionOrigine}"/>
+                </p:column>
+                <p:column sortBy="#{item.filiere.nom_filiere}" filterBy="#{item.filiere.nom_filiere}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.FiliereParcours}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.filiere.nom_filiere}"/>
+                </p:column>
+                <p:column sortBy="#{item.niveau.nom_niveau}" filterBy="#{item.niveau.nom_niveau}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Niveau}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.niveau.nom_niveau}"/>
+                </p:column>
+                <p:column sortBy="#{item.option1.nom_option1}" filterBy="#{item.option1.nom_option1}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Option}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.option1.nom_option1}"/>
+                </p:column>
+<!--                <p:column sortBy="#{item.etudiant.observation}" filterBy="#{item.etudiant.observation}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Observation}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.etudiant.observation}"/>
+                </p:column>-->
+                </p:dataTable>
+
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>

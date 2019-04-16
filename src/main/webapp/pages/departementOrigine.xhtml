@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.DepartementOrigineTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="DepartementOrigineListForm">
+            <p:menubar autoDisplay="true">
+                <p:menuitem value="#{myBundle.Cycle}" url="/pages/cycle.xhtml" title="Cycle d'étude"/>
+                <p:menuitem value="#{myBundle.Niveau}" url="/pages/niveau.xhtml" title="Niveau d'étude"/>
+                <p:menuitem value="#{myBundle.Parcours}" url="/pages/filiere.xhtml" title="Filière d'étude"/>
+                <p:menuitem value="#{myBundle.Option}" url="/pages/option.xhtml" title="Option d'étude"/>
+                <p:menuitem value="||" />
+                <p:menuitem value="#{myBundle.AnneeAccademique}" url="/pages/anneeAccademique.xhtml" title="Année accadémique"/>
+                <p:menuitem value="#{myBundle.Promotion}" url="/pages/promotion.xhtml" title="Promotion d'étude"/>
+                <p:menuitem value="||" />
+                <p:menuitem value="#{myBundle.PaysOrigine}" url="/pages/paysOrigine.xhtml" title="Pays d'origine"/>
+                <p:menuitem value="#{myBundle.RegionOrigine}" url="/pages/regionOrigine.xhtml" title="Région d'origine" />
+                <p:menuitem value="#{myBundle.DepartementOrigine}" url="/pages/departementOrigine.xhtml" title="Departement d'origine" />
+                <p:menuitem value="#{myBundle.ArrondissementOrigine}" url="/pages/arrondissementOrigine.xhtml" title="Arrondissement d'origine"/>
+            </p:menubar>
+        <br/>
+            <h:panelGroup id="display">
+                <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+
+                    <h:outputText value="#{myBundle.RegionOrigine}"/>
+                    <p:selectOneMenu id="idregionOrigine" value="#{departementOrigineBean.regionOrigine.nom_regionOrigine}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.ChoisirRegion}" itemValue=""/>
+                        <f:selectItems value="#{regionOrigineBean.regionOrigineList}"
+                                       var="ro"
+                                       itemValue="#{ro.nom_regionOrigine}"
+                                       itemLabel="#{ro.nom_regionOrigine}"
+                                       />
+                    </p:selectOneMenu>
+                    <h:outputText  value="#{myBundle.Departement}" />
+                    <p:inputText id="nomdepartementOrigine" value="#{departementOrigineBean.departementOrigine.nom_departementOrigine}" 
+                                 title="#{myBundle.CreateDepartementOrigineTitle_nomdepartementOrigine}" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:250px"/>
+                </h:panelGrid>
+                <p:commandButton  type="submit();" actionListener="#{departementOrigineBean.enregistrer()}" value="#{myBundle.Enregistrer}" 
+                                             update="display,:DepartementOrigineListForm:datalist,:growl" />
+            </h:panelGroup>
+            <hr/>
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListeDepartementOrigineTitre}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+            <p:dataTable id="datalist" value="#{departementOrigineBean.departementOrigineList}" var="item"
+                         selectionMode="single" selection="#{departementOrigineBean.departrmOrigineChoisi}"
+                         rowKey="#{item.id_departementOrigine}"
+                         rowIndexVar="index"
+                         emptyMessage="#{myBundle.ListeDepartementOrigineVide}"
+                         >
+                <!--            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>-->
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{item.nom_departementOrigine}" filterBy="#{item.nom_departementOrigine}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Departement}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_departementOrigine}"/>
+                </p:column>
+
+            </p:dataTable>
+
+
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

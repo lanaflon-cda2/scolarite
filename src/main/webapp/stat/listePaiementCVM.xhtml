@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <!--    <ui:define name="title">
+            <h:outputText value="#{myBundle.ListeEtudiant}"/>
+        </ui:define>-->
+
+    <ui:define name="body">
+        <h:form id="EtudiantForm">
+            <!--            <p:growl id="messages"/>-->
+            <p:fieldset id="display" style="margin-top:0px;text-align:center;margin-left:50px;margin-right: 50px">
+                <h:panelGrid columns="9" styleClass="noBorders" >
+                    <p:selectOneMenu  id="liste" value="#{etudiantBean.typeDoc}" style="width:310px" required="true" requiredMessage="#{myBundle.ChampObligatoire}">
+                        <f:selectItem itemLabel="#{myBundle.SelectListe}" itemValue="0" />
+                        <f:selectItem itemLabel="#{myBundle.ListeRetraitCvm}" itemValue="cvm1" />
+                        <f:selectItem itemLabel="#{myBundle.ListeRetourCvm}" itemValue="cvm2" />
+                    </p:selectOneMenu>
+                    <p:commandButton  type="submit();" actionListener="#{etudiantBean.affichageListeistePaiement}" value="#{myBundle.Filtrer}" update=":EtudiantForm:display,:EtudiantForm:data"/> 
+                    <p:commandButton  type="submit();" actionListener="#{inscriptionBean.initialiserListe()}" value="#{myBundle.Initialiser}" update=":EtudiantForm:display,:EtudiantForm:data"/>
+                    <!--<p:inputText id="t2"  value="#{inscriptionBean.titre}" disabled="true" style="width:400px;text-align: center;font-size: 100px;font-style: inherit"/>--> 
+                    <h:commandLink>
+                        <h:graphicImage library="images" name="excel.jpg" />
+                        <p:dataExporter type="xls" postProcessor="#{etudiantBean.postProcessXLS}"
+                                        target="data" fileName="ListeRetraitRetourDoc" />
+                    </h:commandLink>
+                    <h:commandLink>
+                        <h:graphicImage library="images" name="pdf.jpg" />
+                        <p:dataExporter type="pdf" target="data" fileName="ListeRetraitRetourDoc" />
+                    </h:commandLink>
+                </h:panelGrid>
+            </p:fieldset>
+            <p:growl id="messages"/>
+            <p:dataTable id="data" value="#{etudiantBean.listes}" 
+                         var="item"
+                         rowKey="#{item.id_etudiant}"
+                         paginator="true"
+                         rows="20"
+                         rowIndexVar="index"
+                         rowsPerPageTemplate="5,10,15" 
+                         style="margin-top:0px;text-align:center;margin-left:0px;margin-right:0px"
+                         emptyMessage="#{myBundle.ListeVide}" scrollable="false" >
+               
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.matricule}" filterBy="#{item.matricule}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Matricule}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matricule}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.nom}" filterBy="#{item.nom}" >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.NomPrenom}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom}"/>
+                </p:column>
+                 <f:facet name="footer">
+                    <!--<p:inputText id="t"  value="#{etudiantBean.total}" disabled="true" style="width:80px;text-align:center"/>-->
+                </f:facet>
+            </p:dataTable>
+
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>
+
+
+

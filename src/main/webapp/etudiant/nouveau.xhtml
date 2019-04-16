@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Nouveau}"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="EtudiantCreatForm">
+            <br/>
+            <h:panelGroup id="d">
+                <h:panelGrid  id="display" columns="4" styleClass="noBorders" cellpadding="1" cellspacing="5" >
+
+                    <h:outputText value="#{myBundle.NomEtudiant}"/>
+                    <p:inputText id="nom" value="#{etudiantBean.etudiant.nom}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:250px"/>
+
+                    <h:outputText value="#{myBundle.PaysOrigine}"/>
+                    <p:selectOneMenu id="idpaysOrigine" value="#{etudiantBean.paysOrigine.id_pays}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}"/>
+                        <f:selectItems value="#{paysOrigineBean.paysList}"
+                                       var="po" itemValue="#{po.id_pays}" itemLabel="#{po.nom_pays}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.PrenomEtudiant}" />
+                    <p:inputText id="prenom" value="#{etudiantBean.etudiant.prenom}" style="width:250px"/>
+
+                    <h:outputText value="#{myBundle.RegionOrigine}"/>
+                    <p:selectOneMenu id="idregionOrigine" value="#{etudiantBean.regionOrigine.id_regionOrigne}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}"/>
+                        <f:selectItems value="#{regionOrigineBean.regionOrigineList}"
+                                       var="ro" itemValue="#{ro.id_regionOrigne}" itemLabel="#{ro.nom_regionOrigine}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.LieuNaissance}" />
+                    <p:inputText id="lieuNaiss" value="#{etudiantBean.etudiant.lieu_naiss}"   required="true" requiredMessage="#{myBundle.ChampObligatoire}"  style="width:250px"/>
+
+                    <h:outputText value="#{myBundle.Cycle}" />
+                    <p:selectOneMenu value="#{etudiantBean.cycle.id_cycle}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                        <f:selectItems value="#{cycleBean.cycleList}"  var="c" itemLabel="#{c.nom_cycle}" itemValue="#{c.id_cycle}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.Genre}" />
+                    <p:selectOneMenu  value="#{etudiantBean.etudiant.genre}" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">  
+                        <f:selectItem itemLabel="#{myBundle.Sexe}" itemValue="" />  
+                        <f:selectItem itemLabel="#{myBundle.Masculin}" itemValue="M" />  
+                        <f:selectItem itemLabel="#{myBundle.Feminin}" itemValue="F" /> 
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.Niveau}" />
+                    <p:selectOneMenu value="#{etudiantBean.niveau.id_niveau}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                        <f:selectItems value="#{niveauBean.niveauList}"  var="n" itemLabel="#{n.nom_niveau}" itemValue="#{n.id_niveau}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.DateNaissance}" />
+                    <p:calendar value="#{etudiantBean.dateNaissRecuperee}"  size="38" showOn="button" />
+
+                    <h:outputText value="#{myBundle.AnneeAccademique}"/>
+                    <p:selectOneMenu id="idAnneeAccademique" value="#{etudiantBean.anneeAccademique.id_anneeAccademique}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}"/>
+                        <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}"
+                                       var="aa"  itemValue="#{aa.id_anneeAccademique}" itemLabel="#{aa.annee}" />
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.Email}"/>
+                    <p:inputText id="email" value="#{etudiantBean.etudiant.email}"   style="width:250px"/>
+
+                    <h:outputText value="#{myBundle.Filière}" />
+                    <p:selectOneMenu value="#{etudiantBean.filiere.id_filiere}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                        <f:selectItems value="#{filiereBean.filiereList}"  var="f" itemLabel="#{f.nom_filiere}" itemValue="#{f.id_filiere}"/>
+                    </p:selectOneMenu>
+
+
+                    <h:outputText value="#{myBundle.Telephone}" />
+                    <p:inputText id="telephone" value="#{etudiantBean.etudiant.telephone}"   style="width:250px"/>
+
+
+
+                    <h:outputText value="#{myBundle.Option}" />
+                    <p:selectOneMenu value="#{etudiantBean.option1.id_option1}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:257px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                        <f:selectItems value="#{option1Bean.option1List}"  var="o" itemLabel="#{o.nom_option1}" itemValue="#{o.id_option1}"/>
+
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.Tuteur}" />
+                    <p:inputText id="tuteur" value="#{etudiantBean.etudiant.tuteur}"   style="width:250px"/>
+
+                    <h:outputText value="#{myBundle.AdresseTuteur}" />
+                    <p:inputText id="adresseTuteur" value="#{etudiantBean.etudiant.adresse_tuteur}" style="width:250px"/>
+
+                </h:panelGrid>
+                <p:commandButton  type="submit();" actionListener="#{etudiantBean.enregistrer}" value="#{myBundle.Enregistrer}"  update="display,:growl" />
+
+            </h:panelGroup>
+
+
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>

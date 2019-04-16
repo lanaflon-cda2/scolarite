@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+    <ui:define name="body">
+
+        <h:form id="NiveauCreatForm">
+            <p:growl id="msge" showDetail="true"/> 
+            <br/>
+            <center>
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+
+                        <h:outputText  value="#{myBundle.Cycle}"/>
+                        <p:selectOneMenu  id="cycle" value="#{niveauBean.cycle.nom_cycle}" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:200px">
+                            <f:selectItem itemLabel="#{myBundle.ChoisirCycle}" itemValue="" />
+                            <f:selectItems value="#{cycleBean.cycleList}"  var="c" itemLabel="#{c.nom_cycle}" itemValue="#{c.nom_cycle}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="#{myBundle.NiveauEtude}" />
+                        <p:selectOneMenu  value="#{niveauBean.niveau.nom_niveau}" required="true" requiredMessage="choisir un niveau" style="width:200px">  
+                            <f:selectItem itemLabel="#{myBundle.ChoisirNiveau}" itemValue=""/> 
+                            <f:selectItem itemLabel="#{myBundle.Licence1}" itemValue="#{myBundle.Licence1}"/>                              
+                            <f:selectItem itemLabel="#{myBundle.Licence2}" itemValue="#{myBundle.Licence2}"/>  
+                            <f:selectItem itemLabel="#{myBundle.Licence3}" itemValue="#{myBundle.Licence3}"/>
+                            <f:selectItem itemLabel="#{myBundle.Master1}" itemValue="#{myBundle.Master1}"/> 
+                            <f:selectItem itemLabel="#{myBundle.Master2}" itemValue="#{myBundle.Master2}"/> 
+                        </p:selectOneMenu>
+                        <p:commandButton  type="submit();" actionListener="#{niveauBean.enregistrer()}" value="#{myBundle.Enregistrer}" 
+                                          update="display,:NiveauListForm:datalist,:NiveauCreatForm:msge"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </center>
+        </h:form>
+        <hr/>
+        <h:form id="NiveauListForm">
+            <p:growl id="messages" showDetail="true"/>
+            <!-- boite de dialogue: confirmDialog-->
+            <p:confirmDialog global="true">
+                <p:commandButton value="#{myBundle.Oui}" type="button" styleClass="ui-confirmdialog-yes"  icon="ui-icon-check" />
+                <p:commandButton value="#{myBundle.Non}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+            <p:dataTable id="datalist" value="#{niveauBean.niveauList}" var="item"
+                         selectionMode="single" selection="#{niveauBean.niveauChoisi}"
+                         rowKey="#{item.id_niveau}"
+                         rowIndexVar="index" 
+                         style="margin-top:10px;text-align:left;margin-left:200px;margin-right: 200px"
+                         emptyMessage="#{myBundle.ListeNiveauVide}"
+                         >
+
+                <!--                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>-->
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Niveau}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_niveau}"/>
+                </p:column>
+                <p:column  headerText="#{myBundle.Action}">
+                    <p:commandLink value="#{myBundle.Supprimer}" action="#{niveauBean.supprimer()}" update=":NiveauListForm:datalist,:NiveauListForm:messages">
+                        <p:confirm header="Confirmation" message="#{myBundle.ConfirmeSuppression}" icon="ui-icon-alert">
+                        </p:confirm>
+                        <f:setPropertyActionListener target="#{niveauBean.niveau.id_niveau}" value="#{item.id_niveau}"/>
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

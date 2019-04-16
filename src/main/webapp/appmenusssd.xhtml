@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <h:form id="menuForm">
+
+            <p:menubar autoDisplay="true" style="color: black">
+<!--                <p:submenu label="#{myBundle.ParaSysteme}" >
+                    <p:menuitem value="#{myBundle.EnregModifSuppAnnee}"  url="/parametrage/anneeAccademique.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.Documents}"  url="/parametrage/documents.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppCycle}"  url="/parametrage/cycle.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppNiveau}" url="/parametrage/niveau.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppFiliere}"  url="/parametrage/filiere.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppOption}"  url="/parametrage/option.xhtml"/>
+                </p:submenu>-->
+
+<!--                <p:submenu label="#{myBundle.EnregMaj}">
+                    <p:menuitem value="#{myBundle.SaisirDonnees}"  url="/enregistrement/saisirDonnees.xhtml" title="Saisir données futur étudiant" />
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ModifierEtudiant}" url="/miseajour/modifierDonnees.xhtml" title="Modifier données ancien étudiant"/>
+                </p:submenu>-->
+
+                <p:submenu label="#{myBundle.Importation}" >
+<!--                    <p:menuitem value="#{myBundle.ImporterDonnees}"  url="/importation/importerDonnees.xhtml" title="Importer futurs étudiants" />
+                    <p:separator/>-->
+                    <p:menuitem value="#{myBundle.ImporterEtudiant}" url="/importation/importerEtudiant.xhtml" title="Importer étudiants"/>
+                    
+                </p:submenu>
+
+<!--                <p:submenu label="#{myBundle.RetraitCoupons}" >
+                    <p:menuitem value="#{myBundle.RetraitFuturEtudiant}"  url="/preinsiscrip/retraitCouponNouveau.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.RetraitAncienEtudiant}"  url="/preinsiscrip/retraitCouponAncien.xhtml"/>
+
+                </p:submenu>-->
+<!--                <p:submenu label="#{myBundle.RetourCoupons}" >
+                    <p:menuitem value="#{myBundle.RetourFuturEtudiant}"  url="/preinsiscrip/retourCouponNouveau.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.RetourAncienEtudiant}"  url="/preinsiscrip/retourCouponAncien.xhtml"/>
+                </p:submenu>-->
+
+<!--                <p:submenu label="#{myBundle.DocumentAccademique}" >
+                    <p:menuitem value="#{myBundle.CarteEtudiantCertificatScolarite}"  url="/docacca/retraitDocAcc.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.CertificatScolarite}"  url="/docacca/retraitcs.xhtml"/>
+                </p:submenu>-->
+                <p:submenu label="#{myBundle.Statistique}" >
+                    <p:menuitem value="#{myBundle.StatCycle0}"  url="/stat/statCycle.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatFiliere}"  url="/stat/statFiliere.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatGenre}"  url="/stat/statGenre.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatRegion}"  url="/stat/statRegion.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatTrancheAge}"  url="/stat/statTrancheAge.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatAge}"  url="/stat/statAge.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatPaiement}"  url="/stat/statPaiement.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatRetraitCs}"  url="/stat/statRetraitCs.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatRetraitCe}"  url="/stat/statRetraitCe.xhtml"/>
+
+                </p:submenu>
+                <p:submenu label="#{myBundle.ListesEtudiants}" >
+                    <p:menuitem value="#{myBundle.ListeParCritere}"  url="/stat/listeEtudiants.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ListeParPaiement}"  url="/stat/listeEtudiantsPaiement.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ListesEtudiantsGenerale}"  url="/stat/listeGenerale.xhtml"/>
+                </p:submenu>
+<!--                <p:submenu label="#{myBundle.Impression}" >
+                    <p:menuitem value="#{myBundle.StatGenre}"  url="#"/>
+                    <p:menuitem value="#{myBundle.ListesEtudiants}"  url="#"/>
+                </p:submenu>-->
+
+                <!--                <p:menuitem value="|" />
+                                <p:menuitem value="#{myBundle.Administration}" url="/pages/administration.xhtml" title="Cycle d'étude"/>
+                                <p:menuitem value="|" />
+                                rvd et rdoc signifie respectivement retrait validation document et retrait document 
+                                <p:menuitem value="#{myBundle.ControleRetraitDocumentAccademique}" url="/rvd/rdoc.xhtml" title="Retrait/Remise documents accademiques"/>
+                                <p:menuitem value="|" />
+                                vdoc signifie  validation document  
+                                <p:menuitem value="#{myBundle.ControlePreinscriptionInscription}" url="/rvd/vdoc.xhtml" title="Préinscription/Inscription"/>
+                                <p:menuitem value="|" />
+                                <p:menuitem value="#{myBundle.Statistique}" url="/stat/statistique.xhtml" title="Statistiques"/>
+                                <p:menuitem value="|" />
+                                <p:menuitem value="#{myBundle.ListeEtudiant}" url="/liste/listes.xhtml" title="Listes des étudiants"/>
+                                <p:menuitem value="|" /> 
+                                <p:menuitem value="#{myBundle.Impression}" url="/pages/impression.xhtml" title="Impressions"/>
+                                <p:menuitem value="|" />
+                                <p:menuitem value="Déconnexion" url="/j_spring_security_logout" style="font-family: fantasy;"/> -->
+            </p:menubar>
+
+        </h:form>
+    </ui:composition>
+
+</html>

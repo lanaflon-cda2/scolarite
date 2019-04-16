@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="body">
+
+        <h:form id="StatForm">
+            <center> 
+                <h:panelGrid columns="14" styleClass="noBorders" style="size: auto;margin-top:20px">
+                    <p:selectOneMenu id="annee" value="#{statistiqueBean.anneeAccademique.annee}"  style="width:150px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="0" />
+                        <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}"  var="aa" itemLabel="#{aa.annee}" itemValue="#{aa.annee}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton  type="submit();" actionListener="#{statistiqueBean.statCycle()}" value="#{myBundle.Valider}" update=":StatForm:datalist2,:StatForm:datalist3"/>  
+                </h:panelGrid>
+
+
+                <p:panelGrid columns="1" style="size: auto;margin-top:10px" >
+                    <f:facet name="header">  
+                        #{myBundle.StatCycle}
+                    </f:facet> 
+                    <p:dataTable id="datalist2" rowIndexVar="index" value="#{statistiqueBean.cycleEffectifsAnciens}" style="text-align:center" var="eff2" emptyMessage="#{myBundle.Vide}">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Cycle}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff2.cycle}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Male}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff2.male}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Female}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff2.female}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Total}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff2.total}"/>
+                        </p:column>
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statistiqueBean.totalGeneralGarconA}" /> 
+                                <p:column footerText="#{statistiqueBean.totalGeneralFilleA}" />  
+                                <p:column footerText="#{statistiqueBean.totalGeneralA}" />
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+                </p:panelGrid>
+
+                <p:panelGrid columns="1" style="size: auto;margin-top:10px" >
+                    <f:facet name="header">  
+                        #{myBundle.StatNiveau}
+                    </f:facet> 
+                    <p:dataTable id="datalist3" rowIndexVar="index" value="#{statistiqueBean.niveauEffectifs}" style="text-align:center" var="ef" emptyMessage="#{myBundle.Vide}">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Niveau}"/>
+                            </f:facet>
+                            <h:outputText value="#{ef.niveau}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Male}"/>
+                            </f:facet>
+                            <h:outputText value="#{ef.male}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Female}"/>
+                            </f:facet>
+                            <h:outputText value="#{ef.femele}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Total}"/>
+                            </f:facet>
+                            <h:outputText value="#{ef.total}"/>
+                        </p:column>
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statistiqueBean.totalGeneralGarcon}" /> 
+                                <p:column footerText="#{statistiqueBean.totalGeneralFille}" />  
+                                <p:column footerText="#{statistiqueBean.totalGeneral}" />
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+                </p:panelGrid>
+            </center>
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

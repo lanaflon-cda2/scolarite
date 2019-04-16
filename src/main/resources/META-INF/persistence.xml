@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="scolaritePU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>cm.uma.iss.scolarite.entities.AnneeAccademique</class>
+    <class>cm.uma.iss.scolarite.entities.ArrondissementOrigine</class>
+    <class>cm.uma.iss.scolarite.entities.Cycle</class>
+    <class>cm.uma.iss.scolarite.entities.DepartementOrigine</class>
+    <class>cm.uma.iss.scolarite.entities.Droit_universitaire</class>
+    <class>cm.uma.iss.scolarite.entities.Etudiant</class>
+    <class>cm.uma.iss.scolarite.entities.Filiere</class>
+    <class>cm.uma.iss.scolarite.entities.Inscription</class>
+    <class>cm.uma.iss.scolarite.entities.Niveau</class>
+    <class>cm.uma.iss.scolarite.entities.NiveauFiliere</class>
+    <class>cm.uma.iss.scolarite.entities.Option1</class>
+    <class>cm.uma.iss.scolarite.entities.Paiement</class>
+    <class>cm.uma.iss.scolarite.entities.PaysOrigine</class>
+    <class>cm.uma.iss.scolarite.entities.Personne</class>
+    <class>cm.uma.iss.scolarite.entities.Promotion</class>
+    <class>cm.uma.iss.scolarite.entities.RegionOrigine</class>
+    <class>cm.uma.iss.scolarite.entities.RetraitRetourDoc</class>
+    <class>cm.uma.iss.scolarite.entities.RoleUtilisateur</class>
+    <class>cm.uma.iss.scolarite.entities.Utilisateur</class>
+    <class>cm.uma.iss.scolarite.dao.impl.RetraitRetourDocDaoImpl</class>
+    <class>cm.uma.iss.scolarite.entities.projection.CycleFiliereEffectif</class>
+    <class>cm.uma.iss.scolarite.entities.Documents</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+<!--    <properties>
+        <property name="hibernate.connection.username" value="root"/>
+        <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        <property name="hibernate.connection.password" value=""/>
+        <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/scolarite?zeroDateTimeBehavior=convertToNull"/>
+        <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+        <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>-->
+  </persistence-unit>
+</persistence>

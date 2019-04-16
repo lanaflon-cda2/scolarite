@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.FiliereTitre}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="FiliereListForm">
+            <br/>
+            <h:panelGroup id="display">
+                <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+                    <h:outputText value="#{myBundle.FiliereParcours}"/>
+                    <p:selectOneMenu value="#{filiereBean.filiere.nom_filiere}" editable="true" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:350px">
+                        <f:selectItem itemLabel="#{myBundle.Agepd}" itemValue="#{myBundle.Agepd}"/>
+                        <f:selectItem itemLabel="#{myBundle.Basp}" itemValue="#{myBundle.Basp}"/>  
+                        <f:selectItem itemLabel="#{myBundle.Chp}" itemValue="#{myBundle.Chp}"/> 
+                        <f:selectItem itemLabel="#{myBundle.Gtc}" itemValue="#{myBundle.Gtc}"/>
+                        <f:selectItem itemLabel="#{myBundle.Hme}" itemValue="#{myBundle.Hme}"/> 
+                        <f:selectItem itemLabel="#{myBundle.Infotel}" itemValue="#{myBundle.Infotel}"/>   
+                        <f:selectItem itemLabel="#{myBundle.Senvi}" itemValue="#{myBundle.Senvi}"/> 
+                        <f:selectItem itemLabel="#{myBundle.Ssd}" itemValue="#{myBundle.Ssd}"/> 
+                        <f:selectItem itemLabel="#{myBundle.Tmah}" itemValue="#{myBundle.Tmah}"/> 
+                    </p:selectOneMenu>
+<!--                    <h:outputText value="#{myBundle.AbreviationFiliere}"/>
+                    <p:selectOneMenu value="#{filiereBean.filiere.sigle_filiere}" editable="true" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:150px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />  
+                        <f:selectItem itemLabel="#{myBundle.Sigle_AGEPD}" itemValue="#{myBundle.Sigle_AGEPD}" /> 
+                        <f:selectItem itemLabel="#{myBundle.Sigle_BEARSPA}" itemValue="#{myBundle.Sigle_BEARSPA}" /> 
+                        <f:selectItem itemLabel="#{myBundle.Sigle_CHP}" itemValue="#{myBundle.Sigle_CHP}" /> 
+                        <f:selectItem itemLabel="#{myBundle.Sigle_ENREN}" itemValue="#{myBundle.Sigle_ENREN}" /> 
+                        <f:selectItem itemLabel="#{myBundle.Sigle_GTC}" itemValue="#{myBundle.Sigle_GTC}" />
+                        <f:selectItem itemLabel="#{myBundle.Sigle_HYMAE}" itemValue="#{myBundle.Sigle_HYMAE}" /> 
+                        <f:selectItem itemLabel="#{myBundle.Sigle_INFOTEL}" itemValue="#{myBundle.Sigle_INFOTEL}" />
+                        <f:selectItem itemLabel="#{myBundle.Sigle_SCIENV}" itemValue="#{myBundle.Sigle_SCIENV}" />
+                        <f:selectItem itemLabel="#{myBundle.Sigle_SCISOD}" itemValue="#{myBundle.Sigle_SCISOD}" /> 
+                        <f:selectItem itemLabel="#{myBundle.Sigle_TRAMARH}" itemValue="#{myBundle.Sigle_TRAMARH}" /> 
+                    </p:selectOneMenu>-->
+
+                </h:panelGrid>
+                <p:commandButton  type="submit();" actionListener="#{filiereBean.enregistrer()}" 
+                                  value="#{myBundle.Enregistrer}" update="display,:FiliereListForm:datalist,:growl"/>
+            </h:panelGroup>
+
+            <hr/>
+
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListeFiliere}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+            <p:dataTable id="datalist" value="#{filiereBean.filiereList}" var="item"
+                         selectionMode="single" selection="#{filiereBean.filiereChoisi}"
+                         rowKey="#{item.id_filiere}"
+                         rowIndexVar="index"
+                         emptyMessage="#{myBundle.ListeFiliereVide}">
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.nom_filiere}" filterBy="#{item.nom_filiere}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Filière}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_filiere}"/>
+                </p:column>
+                
+<!--                <p:column sortBy="#{item.sigle_filiere}" filterBy="#{item.sigle_filiere}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.SigleFiliere}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.sigle_filiere}"/>
+                </p:column>-->
+
+            </p:dataTable>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title><ui:insert name="title">Scolarite</ui:insert></title>
+        <h:outputStylesheet library="css" name="pfcrud.css"/>
+        <h:outputScript library="scripts" name="pfcrud.js"/>
+        <style type="text/css">
+/*            body {background-color: darkgray; color: yellow; }*/
+        </style>
+
+
+    </h:head>
+
+    <h:body >
+        <p:growl id="growl" life="3000"/>
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="129" >
+<!--                <h:form>
+                    <p:commandLink  actionListener="/j_spring_security_logout" style="text-align: right;" ajax="false">  
+                        <h:outputText value="Déconnexion" />  
+                    </p:commandLink>
+                </h:form>-->
+                <!--<h:outputLink value="Déconnexion" url="" style="font-family: fantasy;"/>--> 
+<!--                <hr/>-->
+                <ui:include src="/banniere.xhtml"/>
+                <ui:include src="/appmenu.xhtml"/>
+            </p:layoutUnit>
+
+<!--            <p:layoutUnit position="west" size="10"/>
+            <p:layoutUnit position="east" size="10"/>-->
+
+            <p:layoutUnit position="south" size="25">
+                <ui:insert name="footer"/>
+                <center><h:outputLabel value="Copyright © 2014 | Uma/DSES/Service de la Scolarité, des Statistiques et de Diplômes | Autor: Samuel Vermon NGNAWEN" style="font-style: oblique"/></center>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

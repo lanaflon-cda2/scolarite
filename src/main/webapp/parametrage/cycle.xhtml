@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="body">
+        <h:form id="CycleCreatForm">
+            <p:growl id="msge" showDetail="true"/> 
+            <br/>
+            <center>
+                <h:panelGroup id="display">
+                    <h:panelGrid   columns="2"  styleClass="noBorders" cellpadding="1" cellspacing="1">
+                        <h:outputText value="#{myBundle.Cycle}" />
+                        <p:selectOneMenu  id="cycle" value="#{cycleBean.cycle.nom_cycle}" editable="false" required="true" requiredMessage="choisir un cycle" style="width:207px">  
+                            <f:selectItem itemLabel="#{myBundle.ChoisirCycle}" itemValue=""/> 
+                            <f:selectItem itemLabel="#{myBundle.Cycle1}" itemValue="#{myBundle.Cycle1}"/>  
+                            <f:selectItem itemLabel="#{myBundle.Cycle2}" itemValue="#{myBundle.Cycle2}"/>  
+                            <!--<f:selectItem itemLabel="#{myBundle.Cycle3}" itemValue="#{myBundle.Cycle3}"/>--> 
+                        </p:selectOneMenu>
+                        <p:commandButton  type="submit" actionListener="#{cycleBean.enregistrer()}" value="#{myBundle.Enregistrer}" 
+                                          update="display,:CycleListForm:datalist,:CycleCreatForm:msge" />
+                    </h:panelGrid>
+                </h:panelGroup>
+            </center>
+        </h:form>
+        <hr/>
+        <h:form id="CycleListForm">
+            <p:growl id="messages" showDetail="true"/>
+            <!-- boite de dialogue: confirmDialog-->
+            <p:confirmDialog global="true">
+                <p:commandButton value="#{myBundle.Oui}" type="button" styleClass="ui-confirmdialog-yes"  icon="ui-icon-check" />
+                <p:commandButton value="#{myBundle.Non}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+            <center>
+                    <p:dataTable id="datalist" value="#{cycleBean.cycleList}" var="item"
+                                 selectionMode="single" 
+                                 selection="#{cycleBean.cycleChoisi}"  
+                                 rowKey="#{item.id_cycle}"
+                                 rowIndexVar="index"
+                                 emptyMessage="#{myBundle.ListeCycleVide}"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 style="margin-top:10px;text-align:left;margin-left:200px;margin-right: 200px"
+                                 widgetVar="offreTable" 
+                                 >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Cycle}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom_cycle}"/>
+                        </p:column>
+                        <p:column  headerText="#{myBundle.Action}">
+                            <p:commandLink value="#{myBundle.Supprimer}" action="#{cycleBean.supprimer()}" update=":CycleListForm:datalist,:CycleListForm:messages">
+                                <p:confirm header="Confirmation" message="#{myBundle.ConfirmeSuppression}" icon="ui-icon-alert">
+                                </p:confirm>
+                                <f:setPropertyActionListener target="#{cycleBean.cycle.id_cycle}" value="#{item.id_cycle}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+            </center>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

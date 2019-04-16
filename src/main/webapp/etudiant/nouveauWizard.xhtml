@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Nouveau}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="EtudiantCreatForm">
+            <p:menubar autoDisplay="true">
+          <!--<p:menuitem value="#{myBundle.Importer}" url="/etudiant/nouveau.xhtml" title="Nouveau"/>-->
+                <p:menuitem value="#{myBundle.Nouveau}" icon="ui-icon-plus" url="/etudiant/nouveau.xhtml" title="Nouveau" />
+                <p:menuitem value="#{myBundle.ToutAfficher}" url="/etudiant/afficherTout.xhtml" title="Afficher tout" />
+            </p:menubar>
+            <br/>
+            <p:growl redisplay="false" life="3000" id="mymessage" autoUpdate="true"/>
+            
+            <p:wizard  widgetVar="wiz"   flowListener="#{etudiantBean.onFlowProcess}" showNavBar="true" nextLabel="Suivant" backLabel="Précedent">
+                <p:tab id="civilite" title="#{myBundle.InformationCivile}" titleStyle="font-size:12px" >   
+                            
+                                <h:panelGrid  id="display" columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1" >
+                                <h:outputText value="#{myBundle.NomEtudiant}"/>
+                                <p:inputText id="nom" value="#{etudiantBean.etudiant.nom}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:250px"/>
+
+                                <h:outputText value="#{myBundle.PrenomEtudiant}" />
+                                <p:inputText id="prenom" value="#{etudiantBean.etudiant.prenom}" style="width:250px"/>
+
+                                <h:outputText value="#{myBundle.DateNaissance}"   />
+                                <p:inputText id="date" value="#{etudiantBean.etudiant.date_naiss}" style="width:250px"/>         
+
+                                <h:outputText value="#{myBundle.LieuNaissance}" />
+                                <p:inputText id="lieuNaiss" value="#{etudiantBean.etudiant.lieu_naiss}"  required="true" style="width:250px"/>
+
+                                <h:outputText value="#{myBundle.Genre}" />
+                                <p:selectOneMenu  value="#{etudiantBean.etudiant.genre}" required="true" style="width:257px">  
+                                    <f:selectItem itemLabel="#{myBundle.Sexe}" itemValue="" />  
+                                    <f:selectItem itemLabel="#{myBundle.Masculin}" itemValue="#{myBundle.Genre}" />  
+                                    <f:selectItem itemLabel="#{myBundle.Feminin}" itemValue="#{myBundle.Genre}" /> 
+                                </p:selectOneMenu>
+                                <h:outputText value="#{myBundle.StatutMatrimoniale}"/>
+                                <p:selectOneMenu value="#{etudiantBean.etudiant.statut_matri}" required="true" style="width:257px">  
+                                    <f:selectItem itemLabel="#{myBundle.Celibataire}" itemValue="#{myBundle.Celibataire}"/>  
+                                    <f:selectItem itemLabel="#{myBundle.Marie}" itemValue="Maie" /> 
+                                    <f:selectItem itemLabel="#{myBundle.Divorce}" itemValue="Divorce" /> 
+                                </p:selectOneMenu>
+                                 <h:outputText value="#{myBundle.PaysOrigine}"/>
+                                <p:selectOneMenu id="idpaysOrigine" value="#{etudiantBean.paysOrigine.id_pays}" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{paysOrigineBean.paysList}"
+                                                   var="po" itemValue="#{po.id_pays}" itemLabel="#{po.nom_pays}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.RegionOrigine}"/>
+                                <p:selectOneMenu id="idregionOrigine" value="#{etudiantBean.regionOrigine.id_regionOrigne}" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{regionOrigineBean.regionOrigineList}"
+                                                   var="ro" itemValue="#{ro.id_regionOrigne}" itemLabel="#{ro.nom_regionOrigine}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.DepartementOrigine}" />
+                                <p:selectOneMenu id="iddepartementOrigine" value="#{etudiantBean.departementOrigine.id_departementOrigine}" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{departementOrigineBean.departementOrigineList}"
+                                                   var="dptO" itemValue="#{dptO.id_departementOrigine}" itemLabel="#{dptO.nom_departementOrigine}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.ArrondissementOrigine}"/>
+                                <p:selectOneMenu id="idarrondissementOrigine" value="#{etudiantBean.arrondissementOrigine.id_arrondissementOrigine}" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{arrondissementOrigineBean.arrondissementOrigineList}"
+                                                   var="ao" itemValue="#{ao.id_arrondissementOrigine}" itemLabel="#{ao.nom_arrondissementOrigine}"/>
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>   
+                    </p:tab> 
+                
+                    <p:tab id="accademique" title="#{myBundle.InformationAccademique}" titleStyle="font-size:12px">
+
+                            <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+
+                                <h:outputText value="#{myBundle.Matricule}" />
+                                <p:inputText id="matricule" value="#{etudiantBean.etudiant.matricule}"  required="true" style="width:200px"/>
+
+                                <h:outputText value="#{myBundle.AnneeAccademique}"/>
+                                <p:selectOneMenu id="idAnneeAccademique" value="#{etudiantBean.anneeAccademique.id_annee_accademique}" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}"
+                                                   var="aa"  itemValue="#{aa.id_annee_accademique}" itemLabel="#{aa.annee}" />
+                                </p:selectOneMenu>
+                                <h:outputText value="#{myBundle.Promotion}"  />
+                                <p:selectOneMenu id="idPromotion" value="#{etudiantBean.promotion.id_promotion}" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{promotionBean.promotionList}"
+                                                   var="promo" itemValue="#{promo.id_promotion}" itemLabel="#{promo.intitule_promotion}"/>
+                                </p:selectOneMenu>
+                                
+                                <h:outputText value="#{myBundle.Categorie}"/>
+                                <p:selectOneMenu value="#{etudiantBean.etudiant.categorie}" required="true" style="width:257px">  
+                                    <f:selectItem itemLabel="#{myBundle.ChoisirCategorie}" itemValue="" />  
+                                    <f:selectItem itemLabel="#{myBundle.Normale}" itemValue="Normale" />  
+                                    <f:selectItem itemLabel="#{myBundle.EtudeDossier}" itemValue="EtudeDossier" />
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.Cycle}" />
+                                <p:selectOneMenu value="#{etudiantBean.cycle.id_cycle}" required="true" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.ChoisirUnCycle}" itemValue="" />
+                                    <f:selectItems value="#{cycleBean.cycleList}"  var="c" itemLabel="#{c.nom_cycle}" itemValue="#{c.id_cycle}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.Niveau}" />
+                                <p:selectOneMenu value="#{etudiantBean.niveau.id_niveau}" required="true" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.ChoisirUnNiveau}" itemValue="" />
+                                    <f:selectItems value="#{niveauBean.niveauList}"  var="n" itemLabel="#{n.nom_niveau}" itemValue="#{n.id_niveau}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.Departement}" />
+                                <p:selectOneMenu value="#{etudiantBean.departement.id_departement}" required="true" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.ChoisirUnDepartement}" itemValue="" />
+                                    <f:selectItems value="#{departementBean.departementList}"  var="d" itemLabel="#{d.nom_departement}" itemValue="#{d.id_departement}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.Filière}" />
+                                <p:selectOneMenu value="#{etudiantBean.filiere.id_filiere}" required="true" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.ChoisirUneFiliere}" itemValue="" />
+                                    <f:selectItems value="#{filiereBean.filiereList}"  var="f" itemLabel="#{f.nom_filiere}" itemValue="#{f.id_filiere}"/>
+                                </p:selectOneMenu>
+
+                                <h:outputText value="#{myBundle.Option}" />
+                                <p:selectOneMenu value="#{etudiantBean.option1.id_option1}" required="true" style="width:257px">
+                                    <f:selectItem itemLabel="#{myBundle.ChoisirUneOption}" itemValue="" />
+                                    <f:selectItems value="#{option1Bean.option1List}"  var="o" itemLabel="#{o.nom_option1}" itemValue="#{o.id_option1}"/>
+
+                                </p:selectOneMenu>
+
+
+                            </h:panelGrid> 
+                    </p:tab>
+
+
+                    <p:tab id="adresses" title="#{myBundle.InformationSupplementaire}" titleStyle="font-size:12px"> 
+                            <h:panelGrid columns="2"  styleClass="noBorders" cellpadding="1" cellspacing="1" style="margin-bottom:10px" > 
+
+                                <h:outputText value="#{myBundle.Email}"/>
+                                <p:inputText id="email" value="#{etudiantBean.etudiant.email}"  required="true" style="width:200px"/>
+
+                                <h:outputText value="#{myBundle.Telephone}" />
+                                <p:inputText id="telephone" value="#{etudiantBean.etudiant.telephone}"  required="true" style="width:200px"/>
+
+                                <h:outputText value="#{myBundle.Tuteur}" />
+                                <p:inputText id="tuteur" value="#{etudiantBean.etudiant.tuteur}"  required="true" style="width:200px"/>
+
+                                <h:outputText value="#{myBundle.AdresseTuteur}" />
+                                <p:inputText id="adresseTuteur" value="#{etudiantBean.etudiant.adresse_tuteur}"  required="true" style="width:200px"/>
+
+                            </h:panelGrid> 
+                    </p:tab>  
+
+                    <p:tab id="confirm" title="#{myBundle.Confirmation}" titleStyle="font-size:12px">  
+                          <hr/>    
+                        <h:panelGrid id="confirmation" columns="2" style="margin-bottom:2px"  styleClass="noBorders" cellpadding="1" cellspacing="1">  
+                              
+                                <h:outputText value="Nom: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.nom}" /> 
+
+                                <h:outputText value="Prénom: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.prenom}" /> 
+
+                                <h:outputText value="Date de naissance: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.date_naiss}" /> 
+
+                                <h:outputText value="Lieu de naissance: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.lieu_naiss}"/> 
+
+                                <h:outputText value="Genre: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.genre}" />
+
+                                <h:outputText value="Statut matrimoniale: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.statut_matri}" />
+                            </h:panelGrid>
+
+                            <hr/>
+                            <h:panelGrid id="confirmation1" columns="2" style="margin-bottom:2px"  styleClass="noBorders" cellpadding="1" cellspacing="1"> 
+
+                                <h:outputText value="Pays: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.paysOrigine.nom_pays}" /> 
+
+                                <h:outputText value="Région: " />  
+                                <h:outputText styleClass="outputLabel"  value="#{etudiantBean.regionOrigine.nom_regionOrigine}" /> 
+
+                                <h:outputText value="Departement: " />  
+                                <h:outputText  styleClass="outputLabel" value="#{etudiantBean.departement.nom_departement}"/>  
+
+                                <h:outputText value="Arrondissement: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.arrondissementOrigine.nom_arrondissementOrigine}" />
+                                
+                            </h:panelGrid>
+                            <hr/>
+                            
+                            <h:panelGrid id="confirmation2" columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1" style="margin-bottom:2px"> 
+                                
+                                 <h:outputText value="Matricule: " />  
+                                 <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.matricule}" /> 
+                                
+                                <h:outputText value="Cycle: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.cycle.nom_cycle}" />  
+
+                                <h:outputText value="Niveau: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.niveau.nom_niveau}" /> 
+
+                                <h:outputText value="Departement: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.departement.nom_departement}" /> 
+
+                                <h:outputText value="Filière: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.filiere.nom_filiere}" /> 
+                                
+                                <h:outputText value="Option: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.option1.nom_option1}" /> 
+
+                                <h:outputText value="Année accademique: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.anneeAccademique.annee}" /> 
+
+                                <h:outputText value="Promotion: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.promotion.intitule_promotion}" /> 
+                                
+                            </h:panelGrid> 
+                            <hr/>
+                            
+                            <h:panelGrid id="confirmation3" columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1" style="margin-bottom:2px"> 
+
+                                <h:outputText value="Email: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.email}" /> 
+
+                                <h:outputText value="Télephone: " />  
+                                <h:outputText styleClass="outputLabel"  value="#{etudiantBean.etudiant.telephone}" /> 
+
+                                <h:outputText value="Tuteur: " />  
+                                <h:outputText  styleClass="outputLabel" value="#{etudiantBean.etudiant.tuteur}"/>  
+
+                                <h:outputText value="Adresse du tuteur: " />  
+                                <h:outputText styleClass="outputLabel" value="#{etudiantBean.etudiant.adresse_tuteur}" />
+                                
+                            </h:panelGrid>
+                            <hr/>
+                            <p:commandButton  type="submit();" immediate="true" actionListener="#{etudiantBean.enregistrer}" value="#{myBundle.Enregistrer}" 
+                                              update="display,:growl" oncomplete="wiz.loadStep (wiz.cfg.steps [0], true)"/>
+
+                    </p:tab> 
+                </p:wizard>
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>

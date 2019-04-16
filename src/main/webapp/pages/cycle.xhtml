@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.TitreCycle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="CycleCreateListForm">
+            <br/>
+<!--            <h:panelGroup id="display">
+                <h:panelGrid   columns="3"  styleClass="noBorders" cellpadding="1" cellspacing="1">
+                    <h:outputText value="#{myBundle.Cycle}" />
+                    <p:selectOneMenu  id="cycle" value="#{cycleBean.cycle.nom_cycle}" editable="false" required="true" requiredMessage="choisir un cycle" style="width:207px">  
+                        <f:selectItem itemLabel="#{myBundle.ChoisirCycle}" itemValue=""/> 
+                        <f:selectItem itemLabel="#{myBundle.Cycle1}" itemValue="#{myBundle.Cycle1}"/>  
+                        <f:selectItem itemLabel="#{myBundle.Cycle2}" itemValue="#{myBundle.Cycle2}"/>  
+                        <f:selectItem itemLabel="#{myBundle.Cycle3}" itemValue="#{myBundle.Cycle3}"/> 
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </h:panelGroup>
+
+            <p:commandButton  type="submit" actionListener="#{cycleBean.enregistrer()}" value="#{myBundle.Enregistrer}" 
+                              update="display,:CycleCreateListForm:datalist,:growl" />
+            <hr/>
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value=" #{myBundle.ListeCycle}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+
+
+            <p:dataTable id="datalist" value="#{cycleBean.cycleList}" var="item"
+                         selectionMode="single" 
+                         selection="#{cycleBean.cycleChoisi}"  
+                         rowKey="#{item.id_cycle}"
+                         rowIndexVar="index"
+                         emptyMessage="#{myBundle.ListeCycleVide}"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         style="margin-top:10px"
+                         widgetVar="offreTable" 
+                         >
+
+                                <f:facet name="header">  
+                #{myBundle.ListeCycle}
+            </f:facet> 
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Cycle}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_cycle}"/>
+                </p:column>
+            </p:dataTable>
+            -->
+            <p:growl id="messages"></p:growl>
+            <p:commandButton value="Download Source Code" action="#{confirmDialogManagedBean.download}" update="messages">
+                <p:confirm header="Confirmation" message="Are you sure you want to install this source code?" icon="ui-icon-alert">
+                </p:confirm>
+            </p:commandButton>
+            <p:commandButton value="Save Your Profile" action="#{confirmDialogManagedBean.save}" update="messages">
+                <p:confirm header="Confirmation" message="Are you sure you want to save your profile?" icon="ui-icon-alert">
+                </p:confirm>
+            </p:commandButton>    
+
+            <p:confirmDialog global="true">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                 icon="ui-icon-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"
+                                 icon="ui-icon-close"/>
+            </p:confirmDialog>
+      
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Importer}"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form  id="form" enctype="multipart/form-data"> 
+            <br/>
+            <p:fieldset style="margin-top:0px;margin-bottom:0px;margin-left:300px;margin-right: 300px">
+                <p:wizard  widgetVar="wiz"   flowListener="#{importationBean.onFlowProcess}" showNavBar="true" nextLabel="Suivant" backLabel="Précedent">
+                    <p:tab id="adresses" title="#{myBundle.AnneeAccademic}" titleStyle="font-size:10px"> 
+                        <h:panelGrid id="panel" columns="1" border="0" cellpadding="5" cellspacing="1">
+                            <p:selectOneMenu  value="#{importationBean.anneeAccademique.annee}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:200px">
+                                <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                                <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}" var="a" itemLabel="#{a.annee}" itemValue="#{a.annee}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </p:tab>  
+                    
+                        <p:tab id="confirm" title="#{myBundle.SelectionTelechargement}"  titleStyle="font-size:10px">  
+                            <p:growl id="messages" showDetail="true"/> 
+                            <h:panelGrid id="panel1" columns="1">
+                            <p:fileUpload fileUploadListener="#{importationBean.handleFileUpload}"
+                                          mode="advanced"  
+                                          update="form:messages" 
+                                          allowTypes="/(\.|\/)(xls)$/"
+                                          label="Selectionner"
+                                          uploadLabel="Télécharger"
+                                          style="font-size:12px"
+                                          /> 
+                             </h:panelGrid>
+                        </p:tab>
+                </p:wizard> 
+            </p:fieldset>  
+
+        </h:form> 
+
+    </ui:define>
+
+</ui:composition>

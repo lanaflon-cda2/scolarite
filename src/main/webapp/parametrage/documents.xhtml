@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Document}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="DocumentCreatForm">
+            <br/>
+            <p:growl id="msge" showDetail="true"/> 
+            <center>
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+                        <h:outputText value="#{myBundle.Document}"/>
+                        <p:selectOneMenu value="#{documentBeans.document.type}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:200px">
+                            <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="#"/>
+                            <f:selectItem itemLabel="#{myBundle.Cvm}" itemValue="#{myBundle.Cvm}"/>
+                            <f:selectItem itemLabel="#{myBundle.Cp}" itemValue="#{myBundle.Cp}"/>  
+                            <f:selectItem itemLabel="#{myBundle.Ct1}" itemValue="#{myBundle.Ct1}"/> 
+                            <f:selectItem itemLabel="#{myBundle.Ct2}" itemValue="#{myBundle.Ct2}"/>
+                            <f:selectItem itemLabel="#{myBundle.Cs}" itemValue="#{myBundle.Cs}"/> 
+                            <f:selectItem itemLabel="#{myBundle.Ce}" itemValue="#{myBundle.Ce}"/>   
+                        </p:selectOneMenu>
+                        <h:outputText value="#{myBundle.Description}"/>
+                        <p:inputTextarea id="description" value="#{documentBeans.document.description}" style="width:200px"/>
+                        <p:commandButton  type="submit();" actionListener="#{documentBeans.enregistrer()}" 
+                                          value="#{myBundle.Enregistrer}" update=":DocumentListForm:datalist, :DocumentCreatForm:msge"/>
+                    </h:panelGrid>
+
+                </h:panelGroup>
+            </center>
+        </h:form>
+        <hr/>
+        <h:form id="DocumentListForm">
+            <p:growl id="messages" showDetail="true"/> 
+            <!--            <center>
+                            <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                                <f:facet name="header">
+                                    <h:outputText value="#{myBundle.ListeDocument}"/>
+                                </f:facet>
+                            </p:panelGrid>
+                        </center>-->
+            <!-- boite de dialogue: confirmDialog-->
+            <p:confirmDialog global="true">
+                <p:commandButton value="#{myBundle.Oui}" type="button" styleClass="ui-confirmdialog-yes"  icon="ui-icon-check" />
+                <p:commandButton value="#{myBundle.Non}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+            <center>
+                    <p:dataTable id="datalist" value="#{documentBeans.listeDocument}" var="item"
+                                 selectionMode="single" selection="#{documentBeans.documentChoisi}"
+                                 rowKey="#{item.id_document}"
+                                 rowIndexVar="index"
+                                 editable="true"
+                                 style="margin-top:10px;text-align:left;margin-left:200px;margin-right: 200px"
+                                 emptyMessage="#{myBundle.ListeVide}">
+
+                        <p:ajax event="rowEdit" listener="#{documentBeans.onEdit}" update=":DocumentListForm:messages" />  
+                        <p:ajax event="rowEditCancel" listener="#{documentBeans.onCancel}" update=":DocumentListForm:messages" /> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+
+                        <p:column headerText="#{myBundle.Document}" style="width:30%">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{item.type}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:inputText value="#{item.type}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor> 
+                        </p:column>
+                        <p:column headerText="#{myBundle.Description}">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{item.description}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:inputText value="#{item.description}" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor> 
+                        </p:column>
+                        <p:column  headerText="#{myBundle.Action}">
+                            <p:commandLink value="#{myBundle.Supprimer}" action="#{documentBeans.supprimer()}" update=":DocumentListForm:datalist,:DocumentListForm:messages">
+                                <p:confirm header="Confirmation" message="#{myBundle.ConfirmeSuppression}" icon="ui-icon-alert">
+                                </p:confirm>
+                                <f:setPropertyActionListener target="#{documentBeans.document.id_document}" value="#{item.id_document}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+            </center>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

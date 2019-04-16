@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Option}"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="Option1CreatForm">
+            <br/>
+            <p:growl id="msge" showDetail="true"/>
+            <center>
+            <h:panelGroup id="display">
+                <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+                    <h:outputText value="#{myBundle.Filière}"  />
+                    <p:selectOneMenu  id="filiere" value="#{option1Bean.filiere.nom_filiere}" requiredMessage="#{myBundle.ChampObligatoire}" required="true" style="width:260px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                        <f:selectItems value="#{filiereBean.filiereList}"  var="f" itemLabel="#{f.nom_filiere}" itemValue="#{f.nom_filiere}"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="#{myBundle.Option}" />
+                    <p:autoComplete   value="#{option1Bean.option1.nom_option1}"  completeMethod="#{filiereBean}"  requiredMessage="#{myBundle.ChampObligatoire}" required="true" size="45"/>
+                    <p:commandButton  type="submit();" actionListener="#{option1Bean.enregistrer()}" value="#{myBundle.Enregistrer}" 
+                                      update="display,:Option1ListForm:datalist,:Option1CreatForm:msge"/>
+                </h:panelGrid>
+            </h:panelGroup>
+            </center>
+        </h:form>
+        <hr/>
+        <h:form id="Option1ListForm">
+            <!-- boite de dialogue: confirmDialog-->
+            <p:confirmDialog global="true">
+                <p:commandButton value="#{myBundle.Oui}" type="button" styleClass="ui-confirmdialog-yes"  icon="ui-icon-check" />
+                <p:commandButton value="#{myBundle.Non}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataTable id="datalist" value="#{option1Bean.option1List}" var="item"
+                         selectionMode="single" selection="#{option1Bean.option1Choisi}"
+                         rowKey="#{item.id_option1}"
+                         paginator="true"
+                         emptyMessage="#{myBundle.ListeOptionVide}"
+                         rowIndexVar="index"
+                         style="margin-top:10px;text-align:left;margin-left:200px;margin-right: 200px"
+                         >
+                <!--            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>-->
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.nom_option1}" filterBy="#{item.nom_option1}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Option}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_option1}"/>
+                </p:column>
+                <p:column  headerText="#{myBundle.Action}">
+                    <p:commandLink value="#{myBundle.Supprimer}" action="#{option1Bean.supprimer()}" update=":Option1ListForm:datalist,:Option1ListForm:messages">
+                        <p:confirm header="Confirmation" message="#{myBundle.ConfirmeSuppression}" icon="ui-icon-alert">
+                        </p:confirm>
+                        <f:setPropertyActionListener target="#{option1Bean.option1.id_option1}" value="#{item.id_option1}"/>
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,2678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="body">
+
+        <h:form id="StatForm">
+            <center>
+                <h:panelGrid columns="2" styleClass="noBorders" style="size: auto;margin-top:10px">
+                    <p:selectOneMenu id="annee" value="#{statAgeBean.anneeAccademique.annee}"  style="width:150px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="0" />
+                        <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}"  var="aa" itemLabel="#{aa.annee}" itemValue="#{aa.annee}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton  type="submit();" actionListener="#{statAgeBean.statAge()}" value="#{myBundle.Valider}" update=":StatForm:datalist1,:StatForm:datalist2,:StatForm:datalist3,:StatForm:datalist4,:StatForm:datalist5"/>  
+                </h:panelGrid>
+                
+                <p:panelGrid columns="1" style="size: auto" >
+                    <f:facet name="header">  
+                        #{myBundle.StatAgeTitre}
+                    </f:facet> 
+                    <p:dataTable id="datalist1" rowIndexVar="index" style="text-align:center" value="#{statAgeBean.niveauAgeGenres}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink style=" text-align:left">
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statAgeBean.postProcessXLS}"
+                                                target="datalist1" fileName="StatAgeLicence1" />
+                            </h:commandLink>
+                            
+                        </f:facet> 
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column rowspan="3" headerText="#{myBundle.Numero}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.FiliereTitre}" />  
+                                <p:column colspan="60" headerText="#{myBundle.Licence1}" />  
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column colspan="3" headerText="#{myBundle.NeApres18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N19}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N20}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N21}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N22}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N23}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N24}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N25}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N26}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N27}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N28}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N29}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N30}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N31}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N32}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N33}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N34}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.Total}" />  
+                                <p:column rowspan="3" headerText="#{myBundle.Etranger}" /> 
+
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" /> 
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filière}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18f}"/>
+                        </p:column> 
+                        <p:column style="text-decoration-color: blue">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18t}" />
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34t}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.tt}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column> 
+
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statAgeBean.tageInf18m}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18f}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18t}" /> 
+                                <p:column footerText="#{statAgeBean.tage18m}" /> 
+                                <p:column footerText="#{statAgeBean.tage18f}" /> 
+                                <p:column footerText="#{statAgeBean.tage18t}" /> 
+                                <p:column footerText="#{statAgeBean.tage19m}" /> 
+                                <p:column footerText="#{statAgeBean.tage19f}" /> 
+                                <p:column footerText="#{statAgeBean.tage19t}" /> 
+                                <p:column footerText="#{statAgeBean.tage20m}" /> 
+                                <p:column footerText="#{statAgeBean.tage20f}" /> 
+                                <p:column footerText="#{statAgeBean.tage20t}" /> 
+                                <p:column footerText="#{statAgeBean.tage21m}" /> 
+                                <p:column footerText="#{statAgeBean.tage21f}" /> 
+                                <p:column footerText="#{statAgeBean.tage21t}" /> 
+                                <p:column footerText="#{statAgeBean.tage22m}" /> 
+                                <p:column footerText="#{statAgeBean.tage22f}" /> 
+                                <p:column footerText="#{statAgeBean.tage22t}" /> 
+                                <p:column footerText="#{statAgeBean.tage23m}" /> 
+                                <p:column footerText="#{statAgeBean.tage23f}" /> 
+                                <p:column footerText="#{statAgeBean.tage23t}" /> 
+                                <p:column footerText="#{statAgeBean.tage24m}" /> 
+                                <p:column footerText="#{statAgeBean.tage24f}" /> 
+                                <p:column footerText="#{statAgeBean.tage24t}" /> 
+                                <p:column footerText="#{statAgeBean.tage25m}" /> 
+                                <p:column footerText="#{statAgeBean.tage25f}" /> 
+                                <p:column footerText="#{statAgeBean.tage25t}" /> 
+                                <p:column footerText="#{statAgeBean.tage26m}" /> 
+                                <p:column footerText="#{statAgeBean.tage26f}" /> 
+                                <p:column footerText="#{statAgeBean.tage26t}" /> 
+                                <p:column footerText="#{statAgeBean.tage27m}" /> 
+                                <p:column footerText="#{statAgeBean.tage27f}" /> 
+                                <p:column footerText="#{statAgeBean.tage27t}" /> 
+                                <p:column footerText="#{statAgeBean.tage28m}" /> 
+                                <p:column footerText="#{statAgeBean.tage28f}" /> 
+                                <p:column footerText="#{statAgeBean.tage28t}" /> 
+                                <p:column footerText="#{statAgeBean.tage29m}" /> 
+                                <p:column footerText="#{statAgeBean.tage29f}" /> 
+                                <p:column footerText="#{statAgeBean.tage29t}" />
+                                <p:column footerText="#{statAgeBean.tage30m}" /> 
+                                <p:column footerText="#{statAgeBean.tage30f}" /> 
+                                <p:column footerText="#{statAgeBean.tage30t}" /> 
+                                <p:column footerText="#{statAgeBean.tage31m}" /> 
+                                <p:column footerText="#{statAgeBean.tage31f}" /> 
+                                <p:column footerText="#{statAgeBean.tage31t}" /> 
+                                <p:column footerText="#{statAgeBean.tage32m}" /> 
+                                <p:column footerText="#{statAgeBean.tage32f}" /> 
+                                <p:column footerText="#{statAgeBean.tage32t}" /> 
+                                <p:column footerText="#{statAgeBean.tage33m}" /> 
+                                <p:column footerText="#{statAgeBean.tage33f}" /> 
+                                <p:column footerText="#{statAgeBean.tage33t}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34m}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f}" /> 
+                                <p:column footerText="#{statAgeBean.ttt}" /> 
+                                <p:column footerText="#{statAgeBean.tetranger}" /> 
+                            </p:row>  
+                        </p:columnGroup>
+                    </p:dataTable>
+                    <p:dataTable id="datalist2" rowIndexVar="index" style="text-align:center" value="#{statAgeBean.niveauAgeGenres1}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statAgeBean.postProcessXLS}"
+                                                target="datalist2" fileName="StatAgeLicence2" />
+                            </h:commandLink>
+<!--                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" preProcessor="#{statAgeBean.preProcessPDF}" target="datalist2" fileName="StatAgeLicence2"/>
+                            </h:commandLink>-->
+                        </f:facet><!--                        <f:facet name="header">  
+                        #{myBundle.Cycle1}
+                    </f:facet> -->
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column rowspan="3" headerText="#{myBundle.Numero}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.FiliereTitre}" />  
+                                <p:column colspan="60" headerText="#{myBundle.Licence2}" />  
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column colspan="3" headerText="#{myBundle.NeApres18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N19}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N20}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N21}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N22}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N23}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N24}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N25}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N26}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N27}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N28}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N29}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N30}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N31}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N32}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N33}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N34}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.Total}" />  
+                                <p:column rowspan="3" headerText="#{myBundle.Etranger}" /> 
+
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" /> 
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filière}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18f}"/>
+                        </p:column> 
+                        <p:column style="text-decoration-color: blue">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18t}" />
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34t}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.tt}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column> 
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statAgeBean.tageInf18m1}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18f1}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage18m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage18f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage18t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage19m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage19f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage19t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage20m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage20f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage20t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage21m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage21f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage21t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage22m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage22f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage22t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage23m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage23f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage23t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage24m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage24f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage24t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage25m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage25f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage25t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage26m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage26f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage26t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage27m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage27f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage27t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage28m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage28f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage28t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage29m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage29f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage29t1}" />
+                                <p:column footerText="#{statAgeBean.tage30m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage30f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage30t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage31m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage31f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage31t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage32m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage32f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage32t1}" /> 
+                                <p:column footerText="#{statAgeBean.tage33m1}" /> 
+                                <p:column footerText="#{statAgeBean.tage33f1}" /> 
+                                <p:column footerText="#{statAgeBean.tage33t1}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34m1}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f1}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f1}" /> 
+                                <p:column footerText="#{statAgeBean.ttt1}" /> 
+                                <p:column footerText="#{statAgeBean.tetranger1}" /> 
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+                    <p:dataTable id="datalist3" rowIndexVar="index" style="text-align:center" value="#{statAgeBean.niveauAgeGenres2}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statAgeBean.postProcessXLS}"
+                                                target="datalist3" fileName="StatAgeLicence3" />
+                            </h:commandLink>
+<!--                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" preProcessor="#{statAgeBean.preProcessPDF}" target="datalist3" fileName="StatAgeLicence3"/>
+                            </h:commandLink>-->
+                        </f:facet>
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column rowspan="3" headerText="#{myBundle.Numero}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.FiliereTitre}" />  
+                                <p:column colspan="60" headerText="#{myBundle.Licence3}" />  
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column colspan="3" headerText="#{myBundle.NeApres18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N19}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N20}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N21}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N22}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N23}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N24}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N25}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N26}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N27}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N28}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N29}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N30}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N31}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N32}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N33}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N34}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.Total}" />  
+                                <p:column rowspan="3" headerText="#{myBundle.Etranger}" /> 
+
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" /> 
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filière}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18f}"/>
+                        </p:column> 
+                        <p:column style="text-decoration-color: blue">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18t}" />
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34t}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.tt}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column> 
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statAgeBean.tageInf18m2}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18f2}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage18m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage18f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage18t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage19m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage19f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage19t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage20m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage20f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage20t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage21m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage21f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage21t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage22m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage22f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage22t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage23m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage23f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage23t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage24m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage24f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage24t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage25m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage25f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage25t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage26m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage26f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage26t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage27m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage27f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage27t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage28m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage28f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage28t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage29m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage29f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage29t2}" />
+                                <p:column footerText="#{statAgeBean.tage30m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage30f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage30t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage31m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage31f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage31t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage32m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage32f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage32t2}" /> 
+                                <p:column footerText="#{statAgeBean.tage33m2}" /> 
+                                <p:column footerText="#{statAgeBean.tage33f2}" /> 
+                                <p:column footerText="#{statAgeBean.tage33t2}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34m2}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f2}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34t2}" /> 
+                                <p:column footerText="#{statAgeBean.ttt2}" /> 
+                                <p:column footerText="#{statAgeBean.tetranger2}" /> 
+                            </p:row>  
+                        </p:columnGroup>
+                    </p:dataTable>
+                    <p:dataTable id="datalist4" rowIndexVar="index" style="text-align:center" value="#{statAgeBean.niveauAgeGenres3}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statAgeBean.postProcessXLS}"
+                                                target="datalist4" fileName="StatAgeMaster1" />
+                            </h:commandLink>
+<!--                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" preProcessor="#{statAgeBean.preProcessPDF}" target="datalist4" fileName="StatAgeMaster1"/>
+                            </h:commandLink>-->
+                        </f:facet>
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column rowspan="3" headerText="#{myBundle.Numero}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.FiliereTitre}" />  
+                                <p:column colspan="60" headerText="#{myBundle.Master1}" />  
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column colspan="3" headerText="#{myBundle.NeApres18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N19}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N20}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N21}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N22}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N23}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N24}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N25}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N26}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N27}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N28}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N29}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N30}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N31}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N32}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N33}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N34}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.Total}" />  
+                                <p:column rowspan="3" headerText="#{myBundle.Etranger}" /> 
+
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" /> 
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filière}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18f}"/>
+                        </p:column> 
+                        <p:column style="text-decoration-color: blue">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18t}" />
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34t}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.tt}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column> 
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statAgeBean.tageInf18m3}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18f3}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage18m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage18f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage18t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage19m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage19f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage19t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage20m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage20f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage20t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage21m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage21f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage21t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage22m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage22f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage22t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage23m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage23f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage23t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage24m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage24f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage24t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage25m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage25f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage25t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage26m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage26f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage26t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage27m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage27f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage27t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage28m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage28f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage28t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage29m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage29f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage29t3}" />
+                                <p:column footerText="#{statAgeBean.tage30m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage30f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage30t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage31m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage31f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage31t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage32m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage32f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage32t3}" /> 
+                                <p:column footerText="#{statAgeBean.tage33m3}" /> 
+                                <p:column footerText="#{statAgeBean.tage33f3}" /> 
+                                <p:column footerText="#{statAgeBean.tage33t3}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34m3}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f3}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f3}" /> 
+                                <p:column footerText="#{statAgeBean.ttt3}" /> 
+                                <p:column footerText="#{statAgeBean.tetranger3}" /> 
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+                    <p:dataTable id="datalist5" rowIndexVar="index" style="text-align:center" value="#{statAgeBean.niveauAgeGenres4}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statAgeBean.postProcessXLS}"
+                                                target="datalist5" fileName="StatAgeMaster2" />
+                            </h:commandLink>
+<!--                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" preProcessor="#{statAgeBean.preProcessPDF}" target="datalist5" fileName="StatAgeMaster2"/>
+                            </h:commandLink>-->
+                        </f:facet>
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column rowspan="3" headerText="#{myBundle.Numero}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.FiliereTitre}" />  
+                                <p:column colspan="60" headerText="#{myBundle.Master2}" />  
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column colspan="3" headerText="#{myBundle.NeApres18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N18}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N19}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N20}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N21}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N22}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N23}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N24}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N25}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N26}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N27}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N28}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N29}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N30}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N31}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N32}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N33}" />  
+                                <p:column colspan="3" headerText="#{myBundle.N34}" /> 
+                                <p:column rowspan="3" headerText="#{myBundle.Total}" />  
+                                <p:column rowspan="3" headerText="#{myBundle.Etranger}" /> 
+
+                            </p:row>  
+
+                            <p:row>  
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" /> 
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                                <p:column headerText="#{myBundle.M}" />  
+                                <p:column headerText="#{myBundle.F}" />  
+                                <p:column headerText="#{myBundle.To}" />
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filière}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18f}"/>
+                        </p:column> 
+                        <p:column style="text-decoration-color: blue">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageInf18t}" />
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age18t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age19t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age20t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age21t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age22t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age23t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age24t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age25t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age26t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age27t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age28t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age29t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age30t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age31t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age32t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.age33t}"/>
+                        </p:column> 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.M}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34m}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.F}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34f}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ageSup34t}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.tt}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column> 
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statAgeBean.tageInf18m4}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18f4}" /> 
+                                <p:column footerText="#{statAgeBean.tageInf18t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage18m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage18f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage18t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage19m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage19f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage19t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage20m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage20f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage20t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage21m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage21f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage21t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage22m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage22f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage22t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage23m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage23f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage23t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage24m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage24f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage24t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage25m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage25f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage25t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage26m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage26f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage26t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage27m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage27f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage27t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage28m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage28f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage28t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage29m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage29f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage29t4}" />
+                                <p:column footerText="#{statAgeBean.tage30m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage30f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage30t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage31m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage31f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage31t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage32m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage32f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage32t4}" /> 
+                                <p:column footerText="#{statAgeBean.tage33m4}" /> 
+                                <p:column footerText="#{statAgeBean.tage33f4}" /> 
+                                <p:column footerText="#{statAgeBean.tage33t4}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34m4}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f4}" /> 
+                                <p:column footerText="#{statAgeBean.tageSup34f4}" /> 
+                                <p:column footerText="#{statAgeBean.ttt4}" /> 
+                                <p:column footerText="#{statAgeBean.tetranger4}" /> 
+                            </p:row>  
+                        </p:columnGroup>
+                    </p:dataTable>
+
+                </p:panelGrid>
+
+            </center>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

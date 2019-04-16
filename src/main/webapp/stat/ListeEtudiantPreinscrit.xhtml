@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Afficher}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="menuForm4">
+            <p:menubar autoDisplay="true">
+                <p:menuitem value="#{myBundle.Importer}" url="/etudiant/nouveau.xhtml" title="Nouveau"/>
+                <p:menuitem value="#{myBundle.Nouveau}" icon="ui-icon-plus" url="/etudiant/nouveau.xhtml" title="Nouveau" />
+                <p:menuitem value="#{myBundle.Editer}"  url="/etudiant/modifier.xhtml" title="modifier" />
+                <p:menuitem value="#{myBundle.VisiteMedicale}"  url="/etudiant/visiteMedicale.xhtml" title="Visite médicale" />
+                <p:menuitem value="#{myBundle.Preinscription}"  url="/etudiant/preinscription.xhtml" icon="ui-icon-pencil" title="Préinscription" />
+                 <p:menuitem value="#{myBundle.Tranche1}"  url="/etudiant/inscription.xhtml" icon="ui-icon-pencil" title="Inscription" />
+                  <p:menuitem value="#{myBundle.Tranche2}"  url="/etudiant/inscription.xhtml" icon="ui-icon-pencil" title="Inscription" />
+                <p:menuitem value="#{myBundle.Inscription}"  url="/etudiant/inscription.xhtml" icon="ui-icon-pencil" title="Inscription" />
+                <p:menuitem value="#{myBundle.ListeEtudiantPreinscrit}" url="/etudiant/ListeEtudiantPreinscrit.xhtml" title="Liste des préinscrits" />
+                <p:menuitem value="#{myBundle.ListeEtudiantInscrit}" url="/etudiant/ListeEtudiantInscrit.xhtml" title="Liste des inscrits" />
+                <p:menuitem value="#{myBundle.ListeEtudiantGenerale}" url="/etudiant/ListeEtudiantGenerale.xhtml" title="Liste générale" />
+            </p:menubar>
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="  #{myBundle.ListeEtudiantPreinscritTitre}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+            <p:dataTable id="datalist" value="#{etudiantBean.etudiantList}" var="item"
+                         selectionMode="single" selection="#{etudiantBean.etudiantChoisi}"
+                         rowKey="#{item.id_etudiant}"
+                         paginator="true"
+                         rows="50"
+                         rowsPerPageTemplate="10,20,30"
+                         rowIndexVar="index"
+                         style="margin-left: 0%;margin-right: 0%"
+                         emptyMessage="#{myBundle.ListeEtudiantVide}"
+                         > 
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Numero}"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.matricule}" filterBy="#{item.matricule}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Matricule}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matricule}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.nom}" filterBy="#{item.nom}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.NomPrenom}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.date_naiss}" filterBy="#{item.date_naiss}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.DateNaiss}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.date_naiss}" >
+                        <f:convertDateTime parent="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column sortBy="#{item.lieu_naiss}" filterBy="#{item.lieu_naiss}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.LieuNaiss}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.lieu_naiss}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.genre}" filterBy="#{item.genre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Genre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.genre}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.observation}" filterBy="#{item.observation}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Observation}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.observation}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.email}" filterBy="#{item.email}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Email}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.email}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.statut_matri}" filterBy="#{item.statut_matri}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.StatutMatri}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.statut_matri}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.telephone}" filterBy="#{item.telephone}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Telephone}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.telephone}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.categorie}" filterBy="#{item.categorie}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Categorie}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.categorie}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.tuteur}" filterBy="#{item.tuteur}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.Tuteur}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tuteur}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.adresse_tuteur}" filterBy="#{item.adresse_tuteur}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.AdresseTuteur}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.adresse_tuteur}"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>

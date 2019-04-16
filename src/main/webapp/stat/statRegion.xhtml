@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="body">
+
+        <h:form id="StatForm">
+            <center>    
+                <h:panelGrid columns="14" styleClass="noBorders" style="size: auto;margin-top:10px">
+                    <p:selectOneMenu id="annee" value="#{statRegionBean.anneeAccademique.annee}"  style="width:150px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="0" />
+                        <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}"  var="aa" itemLabel="#{aa.annee}" itemValue="#{aa.annee}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton  type="submit();" actionListener="#{statRegionBean.statRegion()}" value="#{myBundle.Valider}" update=":StatForm:datalist1,:StatForm:datalist2"/>  
+                </h:panelGrid>
+                
+                <p:panelGrid columns="1" style="size: auto;margin-top:10px" >
+                    <f:facet name="header">  
+                        #{myBundle.StatRegionCycle}
+                    </f:facet> 
+                    <p:dataTable id="datalist1" rowIndexVar="index" style="text-align:center" value="#{statRegionBean.cycle1EffRegions}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statFiliereGenreBean.postProcessXLS}"
+                                                target="datalist1" fileName="Liste#{myBundle.Cycle1}" />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" target="datalist1" fileName="Liste#{myBundle.Cycle1}" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column colspan="14" headerText="#{myBundle.Cycle1}" /> 
+                            </p:row> 
+                            <p:row> 
+                                <p:column headerText="#{myBundle.Numero}" />  
+                                <p:column headerText="#{myBundle.Filiere}" /> 
+                                <p:column headerText="#{myBundle.AD}" />   
+                                <p:column headerText="#{myBundle.CE}" />  
+                                <p:column headerText="#{myBundle.EN}" /> 
+                                <p:column headerText="#{myBundle.ES}" />  
+                                <p:column headerText="#{myBundle.LT}" /> 
+                                <p:column headerText="#{myBundle.NO}" />   
+                                <p:column headerText="#{myBundle.NW}" />  
+                                <p:column headerText="#{myBundle.OU}" />
+                                <p:column headerText="#{myBundle.SU}" />  
+                                <p:column headerText="#{myBundle.SW}" /> 
+                                <p:column headerText="#{myBundle.To}" />   
+                                <p:column headerText="#{myBundle.Etranger}" />  
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filiere}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.AD}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.CE}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ce}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.EN}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.en}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.ES}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.es}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.LT}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.lit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.NO}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.no}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.NW}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.nw}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.OU}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ou}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.SU}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.su}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.SW}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.sw}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.totaRegion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column>
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Totaux}"/>  
+                                <p:column footerText="#{statRegionBean.tad}" /> 
+                                <p:column footerText="#{statRegionBean.tce}" /> 
+                                <p:column footerText="#{statRegionBean.ten}" /> 
+                                <p:column footerText="#{statRegionBean.tes}" /> 
+                                <p:column footerText="#{statRegionBean.tlit}" /> 
+                                <p:column footerText="#{statRegionBean.tno}" /> 
+                                <p:column footerText="#{statRegionBean.tnw}" /> 
+                                <p:column footerText="#{statRegionBean.tou}" /> 
+                                <p:column footerText="#{statRegionBean.tsu}" /> 
+                                <p:column footerText="#{statRegionBean.tsw}" /> 
+                                <p:column footerText="#{statRegionBean.ttotaRegion}" /> 
+                                <p:column footerText="#{statRegionBean.tetranger}" /> 
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+                    <p:dataTable id="datalist2" rowIndexVar="index" style="text-align:center" value="#{statRegionBean.cycle2EffRegions}" var="eff1" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statFiliereGenreBean.postProcessXLS}"
+                                                target="datalist2" fileName="Liste#{myBundle.Cycle2}" />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" target="datalist2" fileName="Liste#{myBundle.Cycle2}" />
+                            </h:commandLink>
+                        </f:facet> 
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column colspan="14" headerText="#{myBundle.Cycle2}" /> 
+                            </p:row> 
+                            <p:row> 
+                                <p:column headerText="#{myBundle.Numero}" />  
+                                <p:column headerText="#{myBundle.Filiere}" /> 
+                                <p:column headerText="#{myBundle.AD}" />   
+                                <p:column headerText="#{myBundle.CE}" />  
+                                <p:column headerText="#{myBundle.EN}" /> 
+                                <p:column headerText="#{myBundle.ES}" />  
+                                <p:column headerText="#{myBundle.LT}" /> 
+                                <p:column headerText="#{myBundle.NO}" />   
+                                <p:column headerText="#{myBundle.NW}" />  
+                                <p:column headerText="#{myBundle.OU}" />
+                                <p:column headerText="#{myBundle.SU}" />  
+                                <p:column headerText="#{myBundle.SW}" /> 
+                                <p:column headerText="#{myBundle.To}" />   
+                                <p:column headerText="#{myBundle.Etranger}" />  
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filiere}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.AD}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.CE}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ce}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.EN}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.en}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.ES}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.es}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.LT}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.lit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.NO}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.no}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.NW}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.nw}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.OU}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.ou}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.SU}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.su}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.SW}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.sw}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.To}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.totaRegion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Etranger}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.etranger}"/>
+                        </p:column>
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Totaux}"/>  
+                                <p:column footerText="#{statRegionBean.tad1}" /> 
+                                <p:column footerText="#{statRegionBean.tce1}" /> 
+                                <p:column footerText="#{statRegionBean.ten1}" /> 
+                                <p:column footerText="#{statRegionBean.tes1}" /> 
+                                <p:column footerText="#{statRegionBean.tlit1}" /> 
+                                <p:column footerText="#{statRegionBean.tno1}" /> 
+                                <p:column footerText="#{statRegionBean.tnw1}" /> 
+                                <p:column footerText="#{statRegionBean.tou1}" /> 
+                                <p:column footerText="#{statRegionBean.tsu1}" /> 
+                                <p:column footerText="#{statRegionBean.tsw1}" /> 
+                                <p:column footerText="#{statRegionBean.ttotaRegion1}" /> 
+                                <p:column footerText="#{statRegionBean.tetranger1}" /> 
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+<!--                    <f:facet name="footer">  
+                        #{myBundle.TotalGeneral}
+                        #{statRegionBean.totalGeneral}
+                    </f:facet> -->
+                </p:panelGrid>
+
+            </center>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
+

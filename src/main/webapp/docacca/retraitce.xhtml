@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+<!--    <ui:define name="title">
+        <h:outputText value="#{myBundle.CarteEtudiant}"/>
+    </ui:define>-->
+
+    <ui:define name="body">
+        <h:form id="EtudiantCreatForm">
+            <h3>Page en cours d'implementation.......</h3>
+<!--            <center>
+                <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="  #{myBundle.Retraitce}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+                <p:fieldset id="display">
+                    <p:panelGrid columns="9" styleClass="noBorders" >
+                        <h:outputText value="#{myBundle.Cycle}" />
+                        <p:selectOneMenu  id="cycle" value="#{inscriptionBean.cycle.nom_cycle}" required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:150px">
+                            <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                            <f:selectItems value="#{cycleBean.cycleList}"  var="c" itemLabel="#{c.nom_cycle}" itemValue="#{c.nom_cycle}"/>
+                            <p:ajax update=":EtudiantCreatForm:niveau"/>
+                        </p:selectOneMenu>
+                        <h:outputText value="#{myBundle.Niveau}" />
+                        <p:selectOneMenu id="niveau" value="#{inscriptionBean.niveau.nom_niveau}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:150px">
+                            <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                            <f:selectItems value="#{niveauBean.niveauList}"  var="n" itemLabel="#{n.nom_niveau}" itemValue="#{n.nom_niveau}"/>
+                        </p:selectOneMenu>
+                        <h:outputText value="#{myBundle.Filière}" />
+                        <p:selectOneMenu value="#{inscriptionBean.filiere.nom_filiere}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:150px">
+                            <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                            <f:selectItems value="#{filiereBean.filiereList}"  var="f" itemLabel="#{f.nom_filiere}" itemValue="#{f.nom_filiere}"/>
+                        </p:selectOneMenu>
+                        <h:outputText value="#{myBundle.Document}" />
+                        <p:selectOneMenu value="#{inscriptionBean.document.type}"  required="true" requiredMessage="#{myBundle.ChampObligatoire}" style="width:150px">
+                            <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="" />
+                            <f:selectItems value="#{documentBeans.listeDocument}"  var="d" itemLabel="#{d.type}" itemValue="#{d.type}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton  type="submit();" actionListener="#{inscriptionBean.retour()}" value="#{myBundle.Valider}" update=":EtudiantCreatForm:display,:EtudiantCreatForm:datalist" />
+                    </p:panelGrid>
+                </p:fieldset>
+                <p:fieldset>
+                    <p:dataTable id="datalist" value="#{inscriptionBean.listeEtudiantsAGEPLic1}" var="item"
+                                 selectionMode="single" 
+                                 rowKey="#{item.etudiant.id_etudiant}"
+                                 paginator="false"
+                                 rows="15"
+                                 rowIndexVar="index"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" 
+                                 style="margin-top:0px"
+                                 widgetVar="offreTable" 
+                                 editable="true"
+                                 emptyMessage="#{myBundle.ListeEtudiantVide}">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{item.etudiant.matricule}" filterBy="#{item.etudiant.matricule}">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Matricule}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etudiant.matricule}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{item.etudiant.nom}" filterBy="#{item.etudiant.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.NomPrenom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etudiant.nom}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{item.etudiant.date_naiss}" filterBy="#{item.etudiant.date_naiss}">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.DateNaiss}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etudiant.date_naiss}" >
+                                <f:convertDateTime parent="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column sortBy="#{item.etudiant.lieu_naiss}" filterBy="#{item.etudiant.lieu_naiss}">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.LieuNaiss}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etudiant.lieu_naiss}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{item.etudiant.genre}" filterBy="#{item.etudiant.genre}">
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Genre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etudiant.genre}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Action}"/>
+                            </f:facet>
+                            <p:commandLink value="Valider" action="#{inscriptionBean.validerRetrait()}" update=":EtudiantCreatForm:datalist">
+                                <f:setPropertyActionListener target="#{inscriptionBean.etudiant.id_etudiant}" value="#{item.etudiant.id_etudiant}"/>
+                            </p:commandLink>   
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>-->
+
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>

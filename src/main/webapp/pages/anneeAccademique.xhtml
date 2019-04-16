@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.AnneeAccademiqueTitre}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="AnneeAccademiqueListForm">
+            <br/>
+            <h:panelGroup id="display">
+                <h:panelGrid columns="2" styleClass="noBorders" cellpadding="1" cellspacing="1">
+                    <h:outputText value="#{myBundle.DebutAnneeAccademique}" />
+                    <p:calendar value="#{anneeAccademiqueBean.debutAnneeAcc}"  size="20" showOn="button" required="true"  requiredMessage="#{myBundle.ChampObligatoire}" />
+                    <h:outputText value="#{myBundle.FinAnneeAccademique}" />
+                    <p:calendar value="#{anneeAccademiqueBean.finAnneeAcc}"  size="20" showOn="button" required="true"  requiredMessage="#{myBundle.ChampObligatoire}" />
+                </h:panelGrid>
+            </h:panelGroup>
+            <p:commandButton  type="submit();" actionListener="#{anneeAccademiqueBean.enregistrement()}" value="#{myBundle.Enregistrer}" update="display,:AnneeAccademiqueListForm:datalist,:growl" />
+            <p:commandButton  type="submit();" actionListener="#{anneeAccademiqueBean.enregistrement()}" value="#{myBundle.Supprimer}" update="display,:AnneeAccademiqueListForm:datalist,:growl" />
+            <hr/>
+            <center>
+                <p:panelGrid columns="1" styleClass="noBorders">
+                    <f:facet name="header">
+                        <h:outputText value=" #{myBundle.AnneeAccademiqueListe}"/>
+                    </f:facet>
+                </p:panelGrid>
+            </center>
+            <p:panelGrid>
+                <p:dataTable id="datalist" value="#{anneeAccademiqueBean.anneeAccList}" var="item"
+                             selectionMode="single" selection="#{anneeAccademiqueBean.anneeAccademiqueChoisi}"
+                             rowKey="#{item.id_anneeAccademique}"
+                             rowIndexVar="index"
+                             emptyMessage="#{myBundle.ListeAnneeVide}">
+                    <p:column >
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.Numero}"/>
+                        </f:facet>
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.DebutAnneeAccademique}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.debutAnnee}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.FinAnneeAccademique}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.finAnnee}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.AnneeAcca}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.annee}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panelGrid>
+
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

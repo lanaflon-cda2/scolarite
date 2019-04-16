@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="body">
+
+        <h:form id="StatForm">
+            <center>
+                 <h:panelGrid columns="2" styleClass="noBorders" style="size: auto;margin-top:20px">
+                    <p:selectOneMenu id="annee" value="#{statFiliereGenreBean.anneeAccademique.annee}"  style="width:150px">
+                        <f:selectItem itemLabel="#{myBundle.Choix}" itemValue="0" />
+                        <f:selectItems value="#{anneeAccademiqueBean.anneeAccList}"  var="aa" itemLabel="#{aa.annee}" itemValue="#{aa.annee}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton  type="submit();" actionListener="#{statFiliereGenreBean.statFiliereCycle1Et2()}" value="#{myBundle.Valider}" update=":StatForm:datalist1,:StatForm:datalist2"/>  
+                </h:panelGrid>
+                
+                 <p:panelGrid columns="2" style="size: auto;margin-top:10px" >
+                    <f:facet name="header">  
+                        #{myBundle.StatFiliereCycle}
+                    </f:facet> 
+                    <p:dataTable id="datalist1" rowIndexVar="index" value="#{statFiliereGenreBean.cycle1Effectifs}" var="eff1" style="text-align:center" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statFiliereGenreBean.postProcessXLS}"
+                                                target="datalist1" fileName="Liste#{myBundle.Cycle1}" />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" target="datalist1" fileName="Liste#{myBundle.Cycle1}" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column colspan="3" headerText="#{myBundle.Cycle1}" /> 
+                            </p:row> 
+                            <p:row> 
+                                <p:column headerText="#{myBundle.Numero}" />  
+                                <p:column headerText="#{myBundle.Filiere}" />  
+                                <p:column headerText="#{myBundle.Total}" /> 
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filiere}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.filiere}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Total}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff1.total}"/>
+                        </p:column>
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statFiliereGenreBean.totalcycle1}" />   
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+
+                    <p:dataTable id="datalist2" rowIndexVar="index" value="#{statFiliereGenreBean.cycle2Effectifs}" var="eff2" style="text-align:center" emptyMessage="#{myBundle.Vide}">
+                        <f:facet name="header">  
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="excel.jpg" />
+                                <p:dataExporter type="xls" postProcessor="#{statFiliereGenreBean.postProcessXLS}"
+                                                target="datalist2" fileName="Liste#{myBundle.Cycle2}" />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <h:graphicImage library="images" name="pdf.jpg" />
+                                <p:dataExporter type="pdf" target="datalist2" fileName="Liste#{myBundle.Cycle2}" />
+                            </h:commandLink>
+                        </f:facet> 
+                         <p:columnGroup type="header">  
+                            <p:row> 
+                                <p:column colspan="3" headerText="#{myBundle.Cycle2}" /> 
+                            </p:row> 
+                            <p:row> 
+                                <p:column headerText="#{myBundle.Numero}" />  
+                                <p:column headerText="#{myBundle.Filiere}" />  
+                                <p:column headerText="#{myBundle.Total}" /> 
+                            </p:row> 
+                        </p:columnGroup>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Filiere}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff2.filiere}"/>
+                        </p:column>
+        <!--                <p:column headerText="#{myBundle.Male}">
+                            <h:outputText value="#{eff2.male}"/>
+                        </p:column>
+                        <p:column headerText="#{myBundle.Female}">
+                            <h:outputText value="#{eff2.female}"/>
+                        </p:column>-->
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{myBundle.Totaux}"/>
+                            </f:facet>
+                            <h:outputText value="#{eff2.total}"/>
+                        </p:column>
+                        <p:columnGroup type="footer">  
+                            <p:row>  
+                                <p:column colspan="2" footerText="#{myBundle.Total}"/>  
+                                <p:column footerText="#{statFiliereGenreBean.totalcycle2}" />   
+                            </p:row>  
+                        </p:columnGroup> 
+                    </p:dataTable>
+<!--                    <f:facet name="footer">  
+                        #{myBundle.TotalGeneral}
+                        #{statFiliereGenreBean.totalGeneral}
+                    </f:facet> -->
+                </p:panelGrid>
+        </center>
+<!--            </p:fieldset>
+            <p:fieldset legend="#{myBundle.StatN}"  style="margin-top:0px;margin-bottom:0px;margin-left:390px;margin-right: 350px">
+            </p:fieldset>-->
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

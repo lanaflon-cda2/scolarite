@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <h:form id="menuForm">
+
+            <p:menubar autoDisplay="true" style="color: black">
+                <p:submenu label="#{myBundle.ParaSysteme}" >
+                    <p:menuitem value="#{myBundle.EnregModifSuppAnnee}"  url="/parametrage/anneeAccademique.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.Documents}"  url="/parametrage/documents.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppCycle}"  url="/parametrage/cycle.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppNiveau}" url="/parametrage/niveau.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppFiliere}"  url="/parametrage/filiere.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.EnregModifSuppOption}"  url="/parametrage/option.xhtml"/>
+                </p:submenu>
+
+                <p:submenu label="#{myBundle.Importation}" >
+                    <p:menuitem value="#{myBundle.ImporterEtudiant}" url="/importation/importerEtudiant.xhtml" title="Importer étudiants"/>
+                </p:submenu>
+                
+                <p:submenu label="#{myBundle.RetraitRetourDocumentAcademique}" >
+                    <p:menuitem value="#{myBundle.RetraitDocumentAcademique}"  url="/preinsiscrip/retraitDocAca.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.RetourDocumentAcademique}"  url="/preinsiscrip/retourDocAca.xhtml"/>
+                </p:submenu>
+
+<!--                <p:submenu label="#{myBundle.CouponsPaiement}" >
+                    <p:menuitem value="#{myBundle.RetraitEtudiant}"  url="/preinsiscrip/retraitCouponAncien.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.RetourEtudiant}"  url="/preinsiscrip/retourCouponAncien.xhtml"/>
+                </p:submenu>-->
+                
+<!--                <p:submenu label="#{myBundle.DocumentAccademique}" >
+                    <p:menuitem value="#{myBundle.CarteEtudiantCertificatScolarite}"  url="/docacca/retraitDocAcc.xhtml"/>
+                </p:submenu>-->
+                
+                <p:submenu label="#{myBundle.Statistique}" >
+                    <p:menuitem value="#{myBundle.StatCycle0}"  url="/stat/statCycle.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatFiliere}"  url="/stat/statFiliere.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatGenre}"  url="/stat/statGenre.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatRegion}"  url="/stat/statRegion.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatTrancheAge}"  url="/stat/statTrancheAge.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatAge}"  url="/stat/statAge.xhtml"/>
+<!--                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatPaiement}"  url="/stat/statPaiement.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatRetraitCs}"  url="/stat/statRetraitCs.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.StatRetraitCe}"  url="/stat/statRetraitCe.xhtml"/>-->
+
+                </p:submenu>
+<!--                <p:submenu label="#{myBundle.ListePaiements}" >
+                    <p:menuitem value="#{myBundle.ListePaiementCVM}"  url="/stat/listePaiementCVM.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ListePaiementPreinscription}"  url="/stat/listeEtudiantsPaiement.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ListePaiementPension}"  url="/stat/listeEtudiantsPaiement.xhtml"/>
+                </p:submenu>-->
+                
+                <p:submenu label="#{myBundle.ListesEtudiants}" >
+                    <p:menuitem value="#{myBundle.ListeEtudiantsParCritere}"  url="/stat/listeEtudiants.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ListeParPaiement}"  url="/stat/listeEtudiantsPaiement.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{myBundle.ListesEtudiantsGenerale}"  url="/stat/listeGenerale.xhtml"/>
+                </p:submenu>
+            </p:menubar>
+
+        </h:form>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listeEtudiant" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f549ae91-1455-4cb5-8332-8064c91bcf87">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="736d0f5a-5e60-4a0f-ac26-13fca20d9473"/>
+	<field name="matricule" class="java.lang.String"/>
+	<field name="nom" class="java.lang.String"/>
+	<field name="prenom" class="java.lang.String"/>
+	<field name="date_naiss" class="java.lang.String"/>
+	<field name="lieu_naiss" class="java.lang.String"/>
+	<field name="categorie" class="java.lang.String"/>
+	<field name="statut_matri" class="java.lang.String"/>
+	<field name="tuteur" class="java.lang.String"/>
+	<field name="adresse_tuteur" class="java.lang.String"/>
+	<field name="genre" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="telephone" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="3" width="310" height="20" uuid="6b6047c4-94fc-4f7d-b23f-de51d37cb294"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Universite de Maroua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="26" width="310" height="21" uuid="94182216-7f15-4814-8508-5873d7c01fdc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Institut Supérieur du Sahel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="94" width="254" height="22" uuid="ebca68bc-ee8e-4ea6-b387-119a5f588a76"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Liste générale des etudiants ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="6" width="310" height="20" uuid="dde8aa49-1225-4e67-a362-3e6564ebb575"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[The University of Maroua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="29" width="310" height="21" uuid="b032236d-3fe6-4a5f-97a2-f8f6ef3bd6d3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[The Higher Institute of  the Maroua]]></text>
+			</staticText>
+			<image>
+				<reportElement x="385" y="6" width="51" height="70" uuid="f9142459-5ac7-4693-ac86-655bd6f6a13d"/>
+				<imageExpression><![CDATA["/home/ngnawen/NetBeansProjects/scolarite/src/main/webapp/resources/images/logo_iss_2.gif"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="28" y="0" width="83" height="20" uuid="b6af75f6-961d-4d12-85f8-a9885c6fb3b2"/>
+				<textElement>
+					<font fontName="Arial Black" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricule]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="0" width="175" height="20" uuid="6d6bc9b4-5a4f-44d4-9014-8edd93394bad"/>
+				<textElement>
+					<font fontName="Arial Black" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom(s)  et  Prenom(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="0" width="165" height="20" uuid="fd2b0793-6e71-4376-8fae-8cbb3d944844"/>
+				<textElement>
+					<font fontName="Arial Black" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de naissance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="533" y="0" width="166" height="20" uuid="a147003e-4514-45d7-8f1e-1bdc71540627"/>
+				<textElement>
+					<font fontName="Arial Black" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lieu de naissance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="722" y="0" width="63" height="20" uuid="a1e200bb-fbf1-47f9-b68e-2c346c1451b8"/>
+				<textElement>
+					<font fontName="Arial Black" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genre]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="28" y="0" width="83" height="20" uuid="c85c2710-ec4b-4f6f-bc8e-e585ec7e5d7c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matricule}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="0" width="151" height="20" uuid="aa3705a9-c9c7-4360-a316-d819f21e1b3f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="533" y="3" width="100" height="20" uuid="aba080f9-c271-493b-b5b3-1504ef8364a9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lieu_naiss}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="727" y="3" width="57" height="20" uuid="2b79bd34-ceef-40b3-83e5-a3e406d3b5ec"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{genre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="341" y="3" width="128" height="20" uuid="06f049bb-a8e5-43e6-a22a-a314f02a3f86"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date_naiss}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="750" y="5" width="40" height="20" uuid="cb90928d-6ee6-480d-952b-91f16bb11ceb"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="5" width="80" height="20" uuid="82cfc63e-3b4c-4aa6-a9bb-45483e965e5b"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

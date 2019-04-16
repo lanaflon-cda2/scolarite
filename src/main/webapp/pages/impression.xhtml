@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.Impression}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="ImpressionForm">
+            <br/>
+            <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                <f:facet name="header">
+                    <h:outputText value="  #{myBundle.ChoisirDocumentEtFormat}"/>
+                </f:facet>
+            </p:panelGrid>
+            <hr/>
+
+            <p:panelGrid columns="2" styleClass="noBorders" style="text-align: center">
+                <h:outputText value="#{myBundle.FormatSouhaite}"/>
+                <p:selectOneMenu value="#{impressionBean.formatDocument}" required="true" style="width:100px"> 
+                    <f:selectItem itemLabel="#{myBundle.Format}" itemValue="" />  
+                    <f:selectItem itemLabel="#{myBundle.Pdf}" itemValue=".pdf" />  
+                    <f:selectItem itemLabel="#{myBundle.Excel}" itemValue=".xls" />  
+                    <f:selectItem itemLabel="#{myBundle.Word}" itemValue=".doc" /> 
+                </p:selectOneMenu>
+            </p:panelGrid>
+            <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                <f:facet name="header">
+                    <h:outputText value="  #{myBundle.CasPaiement}"/>
+                </f:facet>
+            </p:panelGrid>
+            <h:panelGrid  id="display" columns="4" styleClass="noBorders" cellpadding="1" cellspacing="1">
+                <h:outputText value="#{myBundle.DocumentImprimer}" />
+                <p:selectOneMenu  value="#{impressionBean.choixPaiement}" required="true" style="width:420px">  
+                    <f:selectItem itemLabel="#{myBundle.ChoisirDocument}" itemValue="0" />  
+                    <f:selectItem itemLabel="#{myBundle.ListeGeneraleEtudiant}" itemValue="1" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantPayeVisiteMedicale}" itemValue="2" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantNonPayeVisiteMedicale}" itemValue="3" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantPayePreinscription}" itemValue="4" />
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantNonPayePreinscription}" itemValue="5" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantPayeTranche1}" itemValue="6" />
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantNonPayeTranche1}" itemValue="7" />
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantPayeTranche2}" itemValue="8" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantNonPayeTranche2}" itemValue="9" /> 
+                </p:selectOneMenu>
+                <h:commandButton  type="submit();" action="#{impressionBean.pdfPaiement}" value="#{myBundle.ExporterPaiement}"/>
+            </h:panelGrid>
+            <p:panelGrid columns="1" styleClass="noBorders" style="text-align: center">
+                <f:facet name="header">
+                    <h:outputText value="  #{myBundle.CasFiliere}"/>
+                </f:facet>
+            </p:panelGrid>
+            <h:panelGrid  id="display1" columns="4" styleClass="noBorders" cellpadding="1" cellspacing="1">
+                <h:outputText value="#{myBundle.DocumentImprimer}" />
+                <p:selectOneMenu  value="#{impressionBean.choixFiliere}" required="true" style="width:420px">  
+                    <f:selectItem itemLabel="#{myBundle.ChoisirDocument}" itemValue="0" />  
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantAGEPD}" itemValue="1" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantBEARSPA}" itemValue="2" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantCHP}" itemValue="3" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantENREN}" itemValue="4" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantGTC}" itemValue="5" />
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantHYMAE}" itemValue="6" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantINFOTEL}" itemValue="7" />
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantSCIENV}" itemValue="8" />
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantSCISOD}" itemValue="9" /> 
+                    <f:selectItem itemLabel="#{myBundle.ListeEtudiantTRAMARH}" itemValue="10" /> 
+                </p:selectOneMenu>
+                <h:commandButton  type="submit();" action="#{impressionBean.pdfFiliere}" value="#{myBundle.ExporterFiliere}"/>
+            </h:panelGrid>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
